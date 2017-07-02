@@ -1,10 +1,7 @@
 # My Neovim Config!
 
 ### On Linux
-1. Grab this repo:
-```Shell
-git clone git@github.com:robert-claypool/nvim.git
-```
+1. `git clone git@github.com:robert-claypool/nvim.git`
 
 2. Install [vim-plug](https://github.com/junegunn/vim-plug)
 ```Shell
@@ -18,7 +15,8 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 Good luck.
 
 ### External Dependencies
-Prettier is awesome, install it with `npm install -g prettier`.
+[Prettier](https://github.com/prettier/prettier) is awesome.
+Install it with `npm install -g prettier`.
 
 In Visual mode,
 * `<localleader>jj` calls Prettier for JavaScript
