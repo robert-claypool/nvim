@@ -1,0 +1,10 @@
+# Settings saved by :mkview can be ignored.
+nvim-views
+
+# Backups, swaps, and undos too.
+nvim-backups
+nvim-swaps
+nvim-undos
+
+# Putting the custom words list online can leak info on what you are writing.
+spell
