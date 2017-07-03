@@ -3,65 +3,65 @@
 " - Call :PlugInstall to install plugins.
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Plug 'chrisbra/changesPlugin' " requires Vim version 8
-Plug 'nathanaelkane/vim-indent-guides'
-" Plug 'scrooloose/syntastic'
-" Plug 'sjl/gundo.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'gregsexton/MatchTag'
-Plug 'dahu/vim-fanfingtastic'
-" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-" Plug 'Quramy/tsuquyomi'
-Plug 'robert-claypool/rainbow_parentheses.vim'
-Plug 'robert-claypool/SQLUtilities'
-
-" Plug 'tweekmonster/startuptime.vim'
-" Plug 'reedes/vim-thematic'
-" Plug 'justinmk/vim-dirvish'
-
 " IDE-ish
-Plug 'mhinz/vim-startify'
-Plug 'scrooloose/nerdtree'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'vasconcelloslf/vim-interestingwords'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'tweekmonster/startuptime.vim'            " milliseconds matter
+Plug 'tpope/vim-surround'                      " edit surrounding {} [] '' <tag></tag>
+Plug 'tpope/vim-unimpaired'                    " paris of mapping like ]os & [os
+Plug 'tpope/vim-vinegar'                       " open NERDTree with -
+Plug 'tpope/vim-repeat'                        " better support for .
+Plug 'tpope/vim-commentary'                    " comment out code
+Plug 'tpope/vim-sensible'                      " sensible defaults for Vim
+Plug 'tpope/vim-abolish'                       " deal with multiple variants of a word
+Plug 'dahu/vim-fanfingtastic'                  " multi-line `f`orwards
+Plug 'mhinz/vim-startify'                      " welcome screen for Vim
+Plug 'scrooloose/nerdtree'                     " file/directory explorer
+Plug 'editorconfig/editorconfig-vim'           " honor EditorConfig files
+Plug 'vasconcelloslf/vim-interestingwords'     " highlight words
+Plug 'terryma/vim-multiple-cursors'            " Sublime like multiple cursors
+Plug 'nathanaelkane/vim-indent-guides'         " make indents easier to see
+Plug 'vim-airline/vim-airline'                 " status bar stuff
+Plug 'vim-airline/vim-airline-themes'          " status bar themes
+Plug 'jiangmiao/auto-pairs'                    " auto-complete pairs of stuff
+Plug 'sjl/gundo.vim'                           " browse your undo history
+
+" Syntax highlighting
+Plug 'robert-claypool/rainbow_parentheses.vim' " syntax matching for parns
+Plug 'gregsexton/MatchTag'                     " MatchParen for HTML tags
+Plug 'sheerun/vim-polyglot'                    " nice stuff, multiple languages
+
+Plug 'robert-claypool/SQLUtilities'            " SQL formatting
 
 " Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-" Plug 'christoomey/vim-conflicted'
+Plug 'tpope/vim-fugitive'                      " wrapper functions for Git
+Plug 'airblade/vim-gitgutter'                  " visual display of Git diff
+Plug 'christoomey/vim-conflicted'              " deal with Git merge conflicts
+
+" Tsuquyomi is a client for TSServer (editor service bundled into TypeScript).
+" Plug 'Quramy/tsuquyomi'
+" Tsuquyomi requires vimproc
+" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
 Plug 'gavocanov/vim-js-indent'
+Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
 Plug 'mxw/vim-jsx'
+Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sbdchd/neoformat'
+Plug 'neomake/neomake'
+Plug 'benjie/neomake-local-eslint.vim'
 
 " Completion
 Plug 'ervandew/supertab'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': ['javascript', 'javascript.jsx'] }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
+Plug 'steelsojka/deoplete-flow'
 
 " Searching
-Plug 'junegunn/fzf'
-Plug 'rking/ag.vim'
-
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-abolish'
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'sheerun/vim-polyglot'
-
-" Syntax
-Plug 'w0rp/ale'
-Plug 'tmcw/vim-eslint-compiler'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+Plug 'rking/ag.vim' " The Silver Searcher
 
 " Color schemes
 Plug 'nanotech/jellybeans.vim'
@@ -230,9 +230,13 @@ nnoremap <A-p> :bprevious<cr>:redraw<cr>:ls<cr>
 
 " nnoremap <C-k> :tabnext<cr>
 " nnoremap <C-j> :tabprevious<cr>
-" nnoremap <C-p> :FZF<cr>
-" nnoremap <C-l> :FZF<cr> %<tab>
-" nnoremap <leader>w :update<cr>
+"
+" FZF searches
+nnoremap <C-t> :FZF<cr>
+inoremap <C-t> <esc>:FZF<cr>i
+
+nnoremap <C-\> :NERDTreeToggle<cr>
+inoremap <C-\> <ESC>:NERDTreeToggle<cr>
 
 " While NerdTree plugin is installed, vim-vinegar triggers it by default.
 " If for some reason that's not working, uncomment the next line:
@@ -376,21 +380,6 @@ if exists('+undofile')
     set undodir=~/.config/nvim/nvim-undos//
 endif
 set viewdir=~/.config/nvim/nvim-views//
-
-" vim-javascript
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_flow = 1
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = 0
-set completeopt-=preview
-
-" mxw/vim-jsx
-let g:jsx_ext_required = 0
-
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1
 
 set mouse=a
 
@@ -669,6 +658,11 @@ augroup nn_setup
     autocmd VimEnter * call Nn()
 augroup END
 
+" This is for finding Flow. See https://github.com/steelsojka/deoplete-flow
+function! StrTrim(txt)
+    return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+endfunction
+
 function! SetPluginOptions()
 
     if exists('g:loaded_sqlutilities')
@@ -767,6 +761,62 @@ function! SetPluginOptions()
         autocmd Syntax html RainbowParenthesesLoadChevrons
     endif
 
+    if !has("python3")
+        echom "Warning: Deoplete requires Neovim with Python 3."
+    endif
+
+    if exists('g:loaded_deoplete')
+        echom "Configuring Deoplete..."
+        let g:deoplete#enable_at_startup=1
+        let g:deoplete#file#enable_buffer_path=1
+        let g:SuperTabDefaultCompletionType="<c-n>"
+        set completeopt-=preview
+    endif
+
+    if exists('g:loaded_deoplete_flow')
+        echom "Configuring Deoplete Flow..."
+        " Most of the time you will probably want your flow-bin installed in
+        " your node_modules directory of your current project.
+        " This config will preferably take the local version before the global one:
+        let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
+        if g:flow_path == "flow not found" || g:flow_path =~ "which: no flow in"
+            echom "Warning: Flow not found! Install flow-bin with npm."
+        else
+            let g:deoplete#sources#flow#flow_bin=g:flow_path
+        endif
+    endif
+
+    if exists('g:loaded_neomake')
+        " Asynchronous linting and make framework for Neovim/Vim
+        echom "Configuring Neomake..."
+        " Settings sourced from https://github.com/zperrault/vimrc.js ...
+        let g:neomake_warning_sign = {
+        \ 'text': 'W',
+        \ 'texthl': 'WarningMsg',
+        \ }
+        let g:neomake_error_sign = {
+        \ 'text': 'E',
+        \ 'texthl': 'ErrorMsg',
+        \ }
+        let g:neomake_javascript_enabled_makers=['eslint', 'flow']
+        let g:neomake_jsx_enabled_makers=['eslint', 'flow']
+        let g:neomake_open_list=2
+
+        if g:flow_path == "flow not found" || g:flow_path =~ "which: no flow in"
+            echom "Warning: Flow not found! Install flow-bin with npm."
+        else
+            let g:neomake_javascript_flow_exe=g:flow_path
+            let g:neomake_jsx_flow_exe=g:flow_path
+        endif
+
+        autocmd! BufWritePost * Neomake
+    endif
+
+    if exists('g:jsx_ext_required')
+        echom "Configuring Vim-jsx..."
+        let g:jsx_ext_required=0 " default is 1
+    endif
+
     echom "Ready."
 endfunction
 
@@ -783,7 +833,7 @@ augroup plugin_setup
 
     " This must be set when indent_guides is loaded...
     let g:indent_guides_enable_on_vim_startup=1
-    let g:indent_guides_auto_colors = 0
+    let g:indent_guides_auto_colors=0
     autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#161616 ctermbg=black
     autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#1d1d1d ctermbg=darkgrey
 
@@ -796,7 +846,9 @@ augroup plugin_setup
     "
     " By default, the Tern server will shut itself down after five minutes
     " of inactivity. Use --persistent to disable auto-shutdown.
-    let g:tern#arguments = ["--persistent"]
+    let g:tern#arguments=["--persistent"]
+    let g:tern_request_timeout=1
+    let g:tern_show_signature_in_pum=0
 
     " Plugins are loaded *after* Vim has finished processing this config
     " so we test for their existence and do stuff on VimEnter.
