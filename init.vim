@@ -147,12 +147,12 @@ let g:mapleader=","
 let maplocalleader="\\"
 
 " JavaScript & TypeScript formatting require https://github.com/prettier/prettier
-vnoremap <localleader>jj:'<,'>!prettier --stdin --trailing-comma es5 --single-quote<cr>
-nnoremap <localleader>jj <nop>
-vnoremap <localleader>tt :'<,'>!prettier --stdin --trailing-comma es5 --single-quote --parser typescript<cr>
-nnoremap <localleader>tt <nop>
-vnoremap <localleader>cc :'<,'>!prettier --stdin --single-quote --parser postcss<cr>
-nnoremap <localleader>cc <nop>
+vnoremap <localleader>js:'<,'>!prettier --stdin --trailing-comma es5 --single-quote<cr>
+nnoremap <localleader>js <nop>
+vnoremap <localleader>ts :'<,'>!prettier --stdin --trailing-comma es5 --single-quote --parser typescript<cr>
+nnoremap <localleader>ts <nop>
+vnoremap <localleader>cs :'<,'>!prettier --stdin --single-quote --parser postcss<cr>
+nnoremap <localleader>cs <nop>
 
 nnoremap <localleader>ev :vsplit $MYVIMRC<cr>| " mnemonic = 'e'dit my 'v'imrc file
 

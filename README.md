@@ -19,6 +19,6 @@ Good luck.
 Install it with `npm install -g prettier`.
 
 In Visual mode,
-* `<localleader>jj` calls Prettier for JavaScript
-* `<localleader>tt` calls Prettier for TypeScript
-* `<localleader>cc` calls Prettier for PostCSS (CSS/SASS/LESS)
+* `<localleader>js` calls Prettier for JavaScript
+* `<localleader>ts` calls Prettier for TypeScript
+* `<localleader>cs` calls Prettier for PostCSS (CSS/SASS/LESS)
