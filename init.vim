@@ -36,10 +36,11 @@ Plug 'tpope/vim-fugitive'                      " wrapper functions for Git
 Plug 'airblade/vim-gitgutter'                  " visual display of Git diff
 Plug 'christoomey/vim-conflicted'              " deal with Git merge conflicts
 
-" Tsuquyomi is a client for TSServer (editor service bundled into TypeScript).
-" Plug 'Quramy/tsuquyomi'
-" Tsuquyomi requires vimproc
-" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" Completion
+Plug 'ervandew/supertab'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
+Plug 'steelsojka/deoplete-flow'
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
@@ -52,11 +53,10 @@ Plug 'sbdchd/neoformat'
 Plug 'neomake/neomake'
 Plug 'benjie/neomake-local-eslint.vim'
 
-" Completion
-Plug 'ervandew/supertab'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': ['javascript', 'javascript.jsx'] }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
-Plug 'steelsojka/deoplete-flow'
+" TypeScript
+" 1. You may need to run :UpdateRemotePlugins, see https://github.com/mhartington/nvim-typescript/issues/50
+" 2. nvim-typescript requires a tsconfig.json to be present in the current working directory.
+Plug 'mhartington/nvim-typescript', { 'for': 'typescript', 'do': 'npm install -g typescript' }
 
 " Searching
 Plug 'ctrlpvim/ctrlp.vim'
@@ -67,6 +67,8 @@ Plug 'rking/ag.vim' " The Silver Searcher
 Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
 Plug 'reedes/vim-colors-pencil'
+Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
 
 call plug#end()
 
@@ -147,12 +149,12 @@ let g:mapleader=","
 let maplocalleader="\\"
 
 " JavaScript & TypeScript formatting require https://github.com/prettier/prettier
-vnoremap <localleader>js:'<,'>!prettier --stdin --trailing-comma es5 --single-quote<cr>
-nnoremap <localleader>js <nop>
-vnoremap <localleader>ts :'<,'>!prettier --stdin --trailing-comma es5 --single-quote --parser typescript<cr>
-nnoremap <localleader>ts <nop>
-vnoremap <localleader>cs :'<,'>!prettier --stdin --single-quote --parser postcss<cr>
-nnoremap <localleader>cs <nop>
+vnoremap <localleader>=j'<,'>!prettier --stdin --trailing-comma es5 --single-quote<cr>
+nnoremap <localleader>=j <nop>
+vnoremap <localleader>=t :'<,'>!prettier --stdin --trailing-comma es5 --single-quote --parser typescript<cr>
+nnoremap <localleader>=t <nop>
+vnoremap <localleader>=c :'<,'>!prettier --stdin --single-quote --parser postcss<cr>
+nnoremap <localleader>=c <nop>
 
 nnoremap <localleader>ev :vsplit $MYVIMRC<cr>| " mnemonic = 'e'dit my 'v'imrc file
 
@@ -236,7 +238,7 @@ nnoremap <C-t> :FZF<cr>
 inoremap <C-t> <esc>:FZF<cr>i
 
 nnoremap <C-\> :NERDTreeToggle<cr>
-inoremap <C-\> <ESC>:NERDTreeToggle<cr>
+inoremap <C-\> <esc>:NERDTreeToggle<cr>
 
 " While NerdTree plugin is installed, vim-vinegar triggers it by default.
 " If for some reason that's not working, uncomment the next line:
@@ -282,6 +284,13 @@ colorscheme PaperColor
 " colorscheme jellybeans
 " colorscheme gruvbox
 " colorscheme pencil
+
+" let g:onedark_termcolors=16
+" let g:onedark_terminal_italics=1
+" colorscheme onedark
+
+" let g:one_allow_italics = 1 " italic for comments
+" colorscheme one
 
 " Whitespace and color column highlighting are wrapped in a functions because
 " we need to call them when the colorscheme is changed
@@ -330,9 +339,9 @@ if version >= 700
        " up each time we reload this config.
        autocmd!
 
-       autocmd InsertEnter * call PostThemeSettings()
+       " autocmd InsertEnter * call PostThemeSettings()
        autocmd InsertEnter * call WhoaColorColumn('#330066')
-       autocmd InsertLeave * call PostThemeSettings()
+       " autocmd InsertLeave * call PostThemeSettings()
        autocmd InsertLeave * call WhoaColorColumn('#222222')
    augroup END
 endif
@@ -589,7 +598,7 @@ let g:matchparen_insert_timeout=5
 if !exists('g:airline_symbols')
     let g:airline_symbols={}
 endif
-let g:airline_theme='powerlineish'
+let g:airline_theme='papercolor'
 " Enable powerline fonts if you have them installed.
 " https://powerline.readthedocs.org/en/master/installation.html
 let g:airline_powerline_fonts=1
@@ -767,7 +776,6 @@ function! SetPluginOptions()
 
     if exists('g:loaded_deoplete')
         echom "Configuring Deoplete..."
-        let g:deoplete#enable_at_startup=1
         let g:deoplete#file#enable_buffer_path=1
         let g:SuperTabDefaultCompletionType="<c-n>"
         set completeopt-=preview
@@ -798,9 +806,15 @@ function! SetPluginOptions()
         \ 'text': 'E',
         \ 'texthl': 'ErrorMsg',
         \ }
+
         let g:neomake_javascript_enabled_makers=['eslint', 'flow']
         let g:neomake_jsx_enabled_makers=['eslint', 'flow']
+
+        " Open list without moving the cursor
         let g:neomake_open_list=2
+
+        " Error log file
+        let g:neomake_logfile=$HOME.'/log/neomake.log'
 
         if g:flow_path == "flow not found" || g:flow_path =~ "which: no flow in"
             echom "Warning: Flow not found! Install flow-bin with npm."
@@ -839,6 +853,9 @@ augroup plugin_setup
 
     " This must be set when neocomplete is loaded...
     let g:neocomplete#enable_at_startup=1
+
+    " And this must be set before VimEnter...
+    let g:deoplete#enable_at_startup=1
 
     " NOTICE: Tern must be npm installed into bundle/tern_for_vim and
     " Node must be globally available.
