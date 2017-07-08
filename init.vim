@@ -21,7 +21,6 @@ Plug 'terryma/vim-multiple-cursors'            " Sublime like multiple cursors
 Plug 'nathanaelkane/vim-indent-guides'         " make indents easier to see
 Plug 'vim-airline/vim-airline'                 " status bar stuff
 Plug 'vim-airline/vim-airline-themes'          " status bar themes
-Plug 'jiangmiao/auto-pairs'                    " auto-complete pairs of stuff
 Plug 'sjl/gundo.vim'                           " browse your undo history
 
 " Syntax highlighting
