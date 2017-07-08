@@ -750,12 +750,12 @@ function! SetPluginOptions()
         echom "Configuring Startify..."
         let g:startify_change_to_vcs_root=1
         let g:startify_custom_header = [
-            \ '            __',
-            \ '    __  __ /\_\    ___ ___',
-            \ '   /\ \/\ \\/\ \ /'' __` __`\',
-            \ '   \ \ \_/ |\ \ \/\ \/\ \/\ \',
-            \ '    \ \___/  \ \_\ \_\ \_\ \_\',
-            \ '     \/__/    \/_/\/_/\/_/\/_/',
+            \ '                       _',
+            \ '      ___      __  __ /\_\    ___ ___',
+            \ '   /'' __`\   /\ \/\ \\/\ \ /'' __` __`\',
+            \ '   \/\ \/\ \  \ \ \_/ |\ \ \/\ \/\ \/\ \',
+            \ '    \ \_\ \_\  \ \___/  \ \_\ \_\ \_\ \_\',
+            \ '     \/_/\/_/   \/__/    \/_/\/_/\/_/\/_/',
             \ ]
         " Startify menu is "home"
         nnoremap <localleader>hm :Startify<cr>
