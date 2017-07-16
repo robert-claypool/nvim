@@ -212,17 +212,11 @@ nnoremap <localleader>wq :wq<cr>| " faster save and quit
 nnoremap <localleader>ws <C-w>s|  " split window horizontally
 nnoremap <localleader>wv <C-w>v|  " split window vertically
 
-" Windows management
-nnoremap <localleader>wh <C-w>h|  " align window LEFT of others
-nnoremap <localleader>wj <C-w>j|  " align window BELOW others
-nnoremap <localleader>wk <C-w>k|  " align window ABOVE others
-nnoremap <localleader>wl <C-w>l|  " align window RIGHT of others
-
 " Windows navigation
-nnoremap <localleader>hh <C-w>h|  " jump cursor, window to the LEFT
-nnoremap <localleader>jj <C-w>j|  " jump cursor, window to the BELOW
-nnoremap <localleader>kk <C-w>k|  " jump cursor, window to the ABOVE
-nnoremap <localleader>ll <C-w>l|  " jump cursor, window to the RIGHT
+nnoremap <A-h> <C-w>h|  " jump cursor, window to the LEFT
+nnoremap <A-j> <C-w>j|  " jump cursor, window to the BELOW
+nnoremap <A-k> <C-w>k|  " jump cursor, window to the ABOVE
+nnoremap <A-l> <C-w>l|  " jump cursor, window to the RIGHT
 
 " Cycle and then show a list of the buffers.
 " The current buffer will be marked with a '#'.
