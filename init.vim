@@ -63,6 +63,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegu
 Plug 'rking/ag.vim' " The Silver Searcher
 
 " Color schemes
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'nanotech/jellybeans.vim'
 Plug 'morhetz/gruvbox'
 Plug 'reedes/vim-colors-pencil'
@@ -323,7 +324,7 @@ function! PostThemeSettings()
     endif
 endfunction
 call PostThemeSettings()
-call WhoaColorColumn('#222222')
+call WhoaColorColumn('#37474F')
 
 " Let's make it obvious if I'm in insert mode.
 if version >= 700
@@ -333,9 +334,9 @@ if version >= 700
        autocmd!
 
        " autocmd InsertEnter * call PostThemeSettings()
-       autocmd InsertEnter * call WhoaColorColumn('#330066')
+       autocmd InsertEnter * call WhoaColorColumn('#880E4F')
        " autocmd InsertLeave * call PostThemeSettings()
-       autocmd InsertLeave * call WhoaColorColumn('#222222')
+       autocmd InsertLeave * call WhoaColorColumn('#37474F')
    augroup END
 endif
 
