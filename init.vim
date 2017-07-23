@@ -870,7 +870,7 @@ augroup END
 function! GetRichText() range
     execute a:firstline . "," . a:lastline . 'TOhtml'
     w
-    silent !chromium %:p
+    silent !chromium --force-device-scale-factor=1.8 %:p
     sleep 2
     silent !rm %:p
     q!
