@@ -866,5 +866,17 @@ augroup plugin_setup
     autocmd VimEnter * call SetPluginOptions()
 augroup END
 
+" Open the selection in Chromium so it can be copied as rich text.
+function! GetRichText() range
+    execute a:firstline . "," . a:lastline . 'TOhtml'
+    w
+    silent !chromium %:p
+    sleep 2
+    silent !rm %:p
+    q!
+endfunction
+
+vnoremap <localleader>rt :call GetRichText()<cr>
+
 " Keep this last.
 set secure
