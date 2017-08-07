@@ -22,11 +22,13 @@ Plug 'nathanaelkane/vim-indent-guides'         " make indents easier to see
 Plug 'vim-airline/vim-airline'                 " status bar stuff
 Plug 'vim-airline/vim-airline-themes'          " status bar themes
 Plug 'sjl/gundo.vim'                           " browse your undo history
+Plug 'christoomey/vim-tmux-navigator'          " seamless nav between tmux panes and vim splits
 
 " Syntax highlighting
 Plug 'robert-claypool/rainbow_parentheses.vim' " syntax matching for parns
 Plug 'gregsexton/MatchTag'                     " MatchParen for HTML tags
 Plug 'sheerun/vim-polyglot'                    " nice stuff, multiple languages
+Plug 'dominikduda/vim_current_word'            " highlight word under the cursor (all occurrences)
 
 Plug 'robert-claypool/SQLUtilities'            " SQL formatting
 
@@ -40,6 +42,7 @@ Plug 'ervandew/supertab'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
 Plug 'steelsojka/deoplete-flow'
+Plug 'wellle/tmux-complete.vim'
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
