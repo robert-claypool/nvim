@@ -23,6 +23,7 @@ Plug 'vim-airline/vim-airline'                 " status bar stuff
 Plug 'vim-airline/vim-airline-themes'          " status bar themes
 Plug 'sjl/gundo.vim'                           " browse your undo history
 Plug 'christoomey/vim-tmux-navigator'          " seamless nav between tmux panes and vim splits
+Plug 'w0rp/ale'                                " asynchronous linting
 
 " Syntax highlighting
 Plug 'robert-claypool/rainbow_parentheses.vim' " syntax matching for parns
@@ -52,8 +53,8 @@ Plug 'othree/es.next.syntax.vim'
 Plug 'mxw/vim-jsx'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sbdchd/neoformat'
-Plug 'neomake/neomake'
-Plug 'benjie/neomake-local-eslint.vim'
+" Plug 'neomake/neomake' " Neomake or Ale, not both.
+" Plug 'benjie/neomake-local-eslint.vim'
 
 " TypeScript
 " 1. You may need to run :UpdateRemotePlugins, see https://github.com/mhartington/nvim-typescript/issues/50
@@ -791,36 +792,46 @@ function! SetPluginOptions()
         endif
     endif
 
-    if exists('g:loaded_neomake')
-        " Asynchronous linting and make framework for Neovim/Vim
-        echom "Configuring Neomake..."
-        " Settings sourced from https://github.com/zperrault/vimrc.js ...
-        let g:neomake_warning_sign = {
-        \ 'text': 'W',
-        \ 'texthl': 'WarningMsg',
-        \ }
-        let g:neomake_error_sign = {
-        \ 'text': 'E',
-        \ 'texthl': 'ErrorMsg',
-        \ }
+    " if exists('g:loaded_neomake')
+    "     " Asynchronous linting and make framework for Neovim/Vim
+    "     echom "Configuring Neomake..."
+    "     " Settings sourced from https://github.com/zperrault/vimrc.js ...
+    "     let g:neomake_warning_sign = {
+    "     \ 'text': 'W',
+    "     \ 'texthl': 'WarningMsg',
+    "     \ }
+    "     let g:neomake_error_sign = {
+    "     \ 'text': 'E',
+    "     \ 'texthl': 'ErrorMsg',
+    "     \ }
 
-        let g:neomake_javascript_enabled_makers=['eslint', 'flow']
-        let g:neomake_jsx_enabled_makers=['eslint', 'flow']
+    "     let g:neomake_javascript_enabled_makers=['eslint', 'flow']
+    "     let g:neomake_jsx_enabled_makers=['eslint', 'flow']
 
-        " Open list without moving the cursor
-        let g:neomake_open_list=2
+    "     " Open list without moving the cursor
+    "     let g:neomake_open_list=2
 
-        " Error log file
-        let g:neomake_logfile=$HOME.'/log/neomake.log'
+    "     " Error log file
+    "     let g:neomake_logfile=$HOME.'/log/neomake.log'
 
-        if g:flow_path == "flow not found" || g:flow_path =~ "which: no flow in"
-            echom "Warning: Flow not found! Install flow-bin with npm."
-        else
-            let g:neomake_javascript_flow_exe=g:flow_path
-            let g:neomake_jsx_flow_exe=g:flow_path
-        endif
+    "     if g:flow_path == "flow not found" || g:flow_path =~ "which: no flow in"
+    "         echom "Warning: Flow not found! Install flow-bin with npm."
+    "     else
+    "         let g:neomake_javascript_flow_exe=g:flow_path
+    "         let g:neomake_jsx_flow_exe=g:flow_path
+    "     endif
 
-        autocmd! BufWritePost * Neomake
+    "     autocmd! BufWritePost * Neomake
+    " endif
+
+    if exists('g:loaded_ale_dont_use_this_in_other_plugins_please')
+        echom "Configuring ALE..."
+        let g:ale_completion_enabled=1
+        let g:airline#extensions#ale#enabled=1
+        let g:ale_open_list=1
+
+        " nmap <silent> <c-[> <Plug>(ale_previous_wrap)
+        " nmap <silent> <c-]> <Plug>(ale_next_wrap)
     endif
 
     if exists('g:jsx_ext_required')
