@@ -1,0 +1,4 @@
+# On Windows, you might need to download spell files and save them here.
+# See https://github.com/neovim/neovim/wiki/Installing-Neovim
+.sug
+.spl
