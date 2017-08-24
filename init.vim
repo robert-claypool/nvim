@@ -271,13 +271,23 @@ iabbrev Teh The
 " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set background=dark " this only tells Vim what the terminal's background color looks like
 
-let g:PaperColor_Theme_Options = {
-   \   'theme': {
-   \     'default.dark': {
-   \       'transparent_background': 1
-   \     }
-   \   }
-   \ }
+if has('win16') || has('win32')
+    let g:PaperColor_Theme_Options = {
+       \   'theme': {
+       \     'default.dark': {
+       \       'transparent_background': 0
+       \     }
+       \   }
+       \ }
+else
+    let g:PaperColor_Theme_Options = {
+       \   'theme': {
+       \     'default.dark': {
+       \       'transparent_background': 1
+       \     }
+       \   }
+       \ }
+endif
 colorscheme PaperColor
 " colorscheme jellybeans
 " colorscheme gruvbox
@@ -381,12 +391,16 @@ augroup manage_views
 augroup END
 
 " Set backup/swap/undo/view files to the proper folders.
-set backupdir=~/.config/nvim/nvim-backups//
-set directory=~/.config/nvim/nvim-swaps//
-if exists('+undofile')
-    set undodir=~/.config/nvim/nvim-undos//
+if has('win16') || has('win32')
+    " TODO: Configure backup/swap/undo/view folders.
+else
+    set backupdir=~/.config/nvim/nvim-backups//
+    set directory=~/.config/nvim/nvim-swaps//
+    if exists('+undofile')
+        set undodir=~/.config/nvim/nvim-undos//
+    endif
+    set viewdir=~/.config/nvim/nvim-views//
 endif
-set viewdir=~/.config/nvim/nvim-views//
 
 set mouse=a
 
