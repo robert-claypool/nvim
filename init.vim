@@ -153,8 +153,10 @@ let g:mapleader=","
 let maplocalleader="\\"
 
 " JavaScript & TypeScript formatting require https://github.com/prettier/prettier
-vnoremap <localleader>=j'<,'>!prettier --stdin --trailing-comma es5 --single-quote<cr>
+vnoremap <localleader>=j'<,'>!prettier --stdin --trailing-comma es5 --single-quote --parser flow<cr>
 nnoremap <localleader>=j <nop>
+vnoremap <localleader>=s'<,'>!prettier --stdin --parser json<cr>
+nnoremap <localleader>=s <nop>
 vnoremap <localleader>=t :'<,'>!prettier --stdin --trailing-comma es5 --single-quote --parser typescript<cr>
 nnoremap <localleader>=t <nop>
 vnoremap <localleader>=c :'<,'>!prettier --stdin --single-quote --parser postcss<cr>
@@ -844,13 +846,14 @@ function! SetPluginOptions()
         let g:airline#extensions#ale#enabled=1
         let g:ale_open_list=1
 
+        let g:ale_javascript_prettier_eslint_options = '--single-quote --trailing-comma es5'
         " nmap <silent> <c-[> <Plug>(ale_previous_wrap)
         " nmap <silent> <c-]> <Plug>(ale_next_wrap)
     endif
 
     if exists('g:jsx_ext_required')
         echom "Configuring Vim-jsx..."
-        let g:jsx_ext_required=0 " default is 1
+        let g:jsx_ext_required=1 " default is 1
     endif
 
     echom "Ready."
