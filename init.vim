@@ -42,8 +42,13 @@ Plug 'christoomey/vim-conflicted'              " deal with Git merge conflicts
 Plug 'ervandew/supertab'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
-Plug 'steelsojka/deoplete-flow'
+Plug 'steelsojka/deoplete-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
 Plug 'wellle/tmux-complete.vim'
+
+" TypeScript
+" 1. You may need to run :UpdateRemotePlugins, see https://github.com/mhartington/nvim-typescript/issues/50
+" 2. nvim-typescript requires a tsconfig.json to be present in the current working directory.
+Plug 'mhartington/nvim-typescript', { 'for': 'typescript', 'do': 'npm install -g typescript' }
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
@@ -55,11 +60,6 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'sbdchd/neoformat'
 " Plug 'neomake/neomake' " Neomake or Ale, not both.
 " Plug 'benjie/neomake-local-eslint.vim'
-
-" TypeScript
-" 1. You may need to run :UpdateRemotePlugins, see https://github.com/mhartington/nvim-typescript/issues/50
-" 2. nvim-typescript requires a tsconfig.json to be present in the current working directory.
-Plug 'mhartington/nvim-typescript', { 'for': 'typescript', 'do': 'npm install -g typescript' }
 
 " Searching
 Plug 'ctrlpvim/ctrlp.vim'
