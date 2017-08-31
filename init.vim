@@ -518,8 +518,8 @@ noremap  <left>  <nop>
 noremap  <right> <nop>
 
 " Dance faster!
-nnoremap <c-j> jjjjj
-nnoremap <c-k> kkkkk
+nnoremap <a-j> jjjjj
+nnoremap <a-k> kkkkk
 
 " Better line jumping with wrapped lines.
 " See https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
