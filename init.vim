@@ -24,6 +24,7 @@ Plug 'vim-airline/vim-airline-themes'          " status bar themes
 Plug 'sjl/gundo.vim'                           " browse your undo history
 Plug 'christoomey/vim-tmux-navigator'          " seamless nav between tmux panes and vim splits
 Plug 'w0rp/ale'                                " asynchronous linting
+Plug 'blueyed/vim-diminactive'                 " dim inactive windows
 
 " Syntax highlighting
 Plug 'robert-claypool/rainbow_parentheses.vim' " syntax matching for parns
@@ -331,6 +332,10 @@ function! WhoaColorColumn(bg)
     endif
 endfunction
 
+function! WhoaLineNumbersColor(fg)
+    exe 'highlight LineNr guifg='.a:fg
+endfunction
+
 function! PostThemeSettings()
     " Here we run stuff that must be applied after the theme has changed.
     call WhoaWhitespace('red')
@@ -340,7 +345,7 @@ function! PostThemeSettings()
     endif
 endfunction
 call PostThemeSettings()
-call WhoaColorColumn('#37474F')
+call WhoaColorColumn('#1c1c1c')
 
 " Let's make it obvious if I'm in insert mode.
 if version >= 700
@@ -350,9 +355,9 @@ if version >= 700
        autocmd!
 
        " autocmd InsertEnter * call PostThemeSettings()
-       autocmd InsertEnter * call WhoaColorColumn('#880E4F')
+       autocmd InsertEnter * call WhoaLineNumbersColor('#880E4F')
        " autocmd InsertLeave * call PostThemeSettings()
-       autocmd InsertLeave * call WhoaColorColumn('#37474F')
+       autocmd InsertLeave * call WhoaLineNumbersColor('#444444')
    augroup END
 endif
 
@@ -854,6 +859,10 @@ function! SetPluginOptions()
     if exists('g:jsx_ext_required')
         echom "Configuring Vim-jsx..."
         let g:jsx_ext_required=1 " default is 1
+    endif
+
+    if exists('g:loaded_diminactive')
+        echom "Configuring diminactive.vim..."
     endif
 
     echom "Ready."
