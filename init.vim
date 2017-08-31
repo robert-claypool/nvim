@@ -216,29 +216,29 @@ nnoremap <localleader>qq :q<cr>|  " faster quit
 nnoremap <localleader>wq :wq<cr>| " faster save and quit
 
 " Windows splits
-nnoremap <localleader>ws <C-w>s|  " split window horizontally
-nnoremap <localleader>wv <C-w>v|  " split window vertically
+nnoremap <localleader>ws <c-w>s|  " split window horizontally
+nnoremap <localleader>wv <c-w>v|  " split window vertically
 
 " Windows navigation
-nnoremap <A-h> <C-w>h|  " jump cursor, window to the LEFT
-nnoremap <A-j> <C-w>j|  " jump cursor, window to the BELOW
-nnoremap <A-k> <C-w>k|  " jump cursor, window to the ABOVE
-nnoremap <A-l> <C-w>l|  " jump cursor, window to the RIGHT
+nnoremap <a-h> <c-w>h|  " jump cursor, window to the LEFT
+nnoremap <a-j> <c-w>j|  " jump cursor, window to the BELOW
+nnoremap <a-k> <c-w>k|  " jump cursor, window to the ABOVE
+nnoremap <a-l> <c-w>l|  " jump cursor, window to the RIGHT
 
 " Cycle and then show a list of the buffers.
 " The current buffer will be marked with a '#'.
-nnoremap <A-n> :bnext<cr>:redraw<cr>:ls<cr>
-nnoremap <A-p> :bprevious<cr>:redraw<cr>:ls<cr>
+nnoremap <a-n> :bnext<cr>:redraw<cr>:ls<cr>
+nnoremap <a-p> :bprevious<cr>:redraw<cr>:ls<cr>
 
-" nnoremap <C-k> :tabnext<cr>
-" nnoremap <C-j> :tabprevious<cr>
+" nnoremap <c-k> :tabnext<cr>
+" nnoremap <c-j> :tabprevious<cr>
 "
 " FZF searches
-nnoremap <C-t> :FZF<cr>
-inoremap <C-t> <esc>:FZF<cr>i
+nnoremap <c-t> :FZF<cr>
+inoremap <c-t> <esc>:FZF<cr>i
 
-nnoremap <C-\> :NERDTreeToggle<cr>
-inoremap <C-\> <esc>:NERDTreeToggle<cr>
+nnoremap <c-\> :NERDTreeToggle<cr>
+inoremap <c-\> <esc>:NERDTreeToggle<cr>
 
 " While NerdTree plugin is installed, vim-vinegar triggers it by default.
 " If for some reason that's not working, uncomment the next line:
@@ -430,7 +430,7 @@ set mouse=a
 
 let g:neoformat_only_msg_on_error = 1
 
-" inoremap <expr><tab>  pumvisible() ? "<C-n>" : "<tab>"
+" inoremap <expr><tab>  pumvisible() ? "<c-n>" : "<tab>"
 " " Automatically open and close the popup menu / preview window
 " au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
