@@ -237,7 +237,7 @@ nnoremap <a-p> :bprevious<cr>:redraw<cr>:ls<cr>
 nnoremap <c-t> :FZF<cr>
 inoremap <c-t> <esc>:FZF<cr>i
 
-nnoremap <c-\> :NERDTreeToggle<cr>
+nnoremap <c-\> <esc>:NERDTreeToggle<cr>
 inoremap <c-\> <esc>:NERDTreeToggle<cr>
 
 " While NerdTree plugin is installed, vim-vinegar triggers it by default.
