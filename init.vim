@@ -25,6 +25,7 @@ Plug 'sjl/gundo.vim'                           " browse your undo history
 Plug 'christoomey/vim-tmux-navigator'          " seamless nav between tmux panes and vim splits
 Plug 'w0rp/ale'                                " asynchronous linting
 Plug 'blueyed/vim-diminactive'                 " dim inactive windows
+Plug 'rkitover/vimpager'                       " use Vim as PAGER
 
 " Syntax highlighting
 Plug 'robert-claypool/rainbow_parentheses.vim' " syntax matching for parns
@@ -863,6 +864,17 @@ function! SetPluginOptions()
 
     if exists('g:loaded_diminactive')
         echom "Configuring diminactive.vim..."
+    endif
+
+    if exists('g:vimpager_plugin_loaded')
+        " A binary is required, https://github.com/rkitover/vimpager#install
+        if !empty((globpath(&rtp, '/usr/share/vimpager')))
+            echom "Configuring Vim PAGER..."
+            set rtp^=/usr/share/vimpager
+            " Disable less compatibility mode, use regular Vim motions
+            let g:less={}
+            let g:less.enabled=0
+        endif
     endif
 
     echom "Ready."
