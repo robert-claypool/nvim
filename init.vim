@@ -154,6 +154,9 @@ let g:mapleader=","
 " Use \\ because we must escape the backslash.
 let maplocalleader="\\"
 
+" Terminal emulation
+:tnoremap <esc> <c-\><c-n>
+
 " JavaScript & TypeScript formatting require https://github.com/prettier/prettier
 vnoremap <localleader>=j'<,'>!prettier --stdin --trailing-comma es5 --single-quote --parser flow<cr>
 nnoremap <localleader>=j <nop>
