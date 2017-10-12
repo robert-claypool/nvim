@@ -403,7 +403,12 @@ augroup END
 
 " Set backup/swap/undo/view files to the proper folders.
 if has('win16') || has('win32')
-    " TODO: Configure backup/swap/undo/view folders.
+    set backupdir=~/git/nvim/nvim-backups//
+    set directory=~/git/nvim/nvim-swaps//
+    if exists('+undofile')
+        set undodir=~/git/nvim/nvim-undos//
+    endif
+    set viewdir=~/git/nvim/nvim-views//
 else
     set backupdir=~/.config/nvim/nvim-backups//
     set directory=~/.config/nvim/nvim-swaps//
@@ -925,7 +930,11 @@ augroup END
 function! GetRichText() range
     execute a:firstline . "," . a:lastline . 'TOhtml'
     w
-    silent !chromium --force-device-scale-factor=1.8 %:p
+    if has('win16') || has('win32')
+        silent !start chrome --force-device-scale-factor=1.8 %:p
+    else
+        silent !chromium --force-device-scale-factor=1.8 %:p
+    endif
     sleep 2
     silent !rm %:p
     q!
