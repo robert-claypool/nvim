@@ -885,6 +885,11 @@ function! SetPluginOptions()
         endif
     endif
 
+    if exists('g:loaded_EditorConfig')
+        echom "Configuring editorconfig-vim..."
+        let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+    endif
+
     echom "Ready."
 endfunction
 
