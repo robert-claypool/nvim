@@ -8,3 +8,4 @@ ln -s ~/git/nvim ~/.config/nvim
 mkdir --parents ~/.local/share/nvim/plugged
 
 echo "Done."
+echo "See README.md for plugin installation instructions."
