@@ -929,6 +929,7 @@ augroup plugin_setup
     " UltiSnips will otherwise be interrupted by ALE.
     let g:ale_lint_on_text_changed='never'
     let g:ale_lint_on_save=1
+    nnoremap <leader>l :ALELint<cr>
 
     " NOTICE: Tern must be npm installed into bundle/tern_for_vim and
     " Node must be globally available.
