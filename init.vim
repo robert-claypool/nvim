@@ -4,41 +4,42 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " IDE-ish
-Plug 'tweekmonster/startuptime.vim'            " milliseconds matter
-Plug 'tpope/vim-surround'                      " edit surrounding {} [] '' <tag></tag>
-Plug 'tpope/vim-unimpaired'                    " paris of mapping like ]os & [os
-Plug 'tpope/vim-vinegar'                       " open NERDTree with -
-Plug 'tpope/vim-repeat'                        " better support for .
-Plug 'tpope/vim-commentary'                    " comment out code
-Plug 'tpope/vim-sensible'                      " sensible defaults for Vim
-Plug 'tpope/vim-abolish'                       " deal with multiple variants of a word
-Plug 'dahu/vim-fanfingtastic'                  " multi-line `f`orwards
-Plug 'mhinz/vim-startify'                      " welcome screen for Vim
-Plug 'scrooloose/nerdtree'                     " file/directory explorer
-Plug 'editorconfig/editorconfig-vim'           " honor EditorConfig files
-Plug 'vasconcelloslf/vim-interestingwords'     " highlight words
-Plug 'terryma/vim-multiple-cursors'            " Sublime like multiple cursors
-Plug 'nathanaelkane/vim-indent-guides'         " make indents easier to see
-Plug 'vim-airline/vim-airline'                 " status bar stuff
-Plug 'vim-airline/vim-airline-themes'          " status bar themes
-Plug 'sjl/gundo.vim'                           " browse your undo history
-Plug 'christoomey/vim-tmux-navigator'          " seamless nav between tmux panes and vim splits
-Plug 'w0rp/ale'                                " asynchronous linting
-Plug 'blueyed/vim-diminactive'                 " dim inactive windows
-Plug 'rkitover/vimpager'                       " use Vim as PAGER
+Plug 'tweekmonster/startuptime.vim'        " milliseconds matter
+Plug 'tpope/vim-surround'                  " edit surrounding {} [] '' <tag></tag>
+Plug 'tpope/vim-unimpaired'                " paris of mapping like ]os & [os
+Plug 'tpope/vim-vinegar'                   " open NERDTree with -
+Plug 'tpope/vim-repeat'                    " better support for .
+Plug 'tpope/vim-commentary'                " comment out code
+Plug 'tpope/vim-sensible'                  " sensible defaults for Vim
+Plug 'tpope/vim-abolish'                   " deal with multiple variants of a word
+Plug 'dahu/vim-fanfingtastic'              " multi-line `f`orwards
+Plug 'mhinz/vim-startify'                  " welcome screen for Vim
+Plug 'scrooloose/nerdtree'                 " file/directory explorer
+Plug 'editorconfig/editorconfig-vim'       " honor EditorConfig files
+Plug 'vasconcelloslf/vim-interestingwords' " highlight words
+Plug 'terryma/vim-multiple-cursors'        " Sublime like multiple cursors
+Plug 'nathanaelkane/vim-indent-guides'     " make indents easier to see
+Plug 'vim-airline/vim-airline'             " status bar stuff
+Plug 'vim-airline/vim-airline-themes'      " status bar themes
+Plug 'sjl/gundo.vim'                       " browse your undo history
+Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
+Plug 'w0rp/ale'                            " asynchronous linting
+Plug 'blueyed/vim-diminactive'             " dim inactive windows
+Plug 'rkitover/vimpager'                   " use Vim as PAGER
+Plug 'w0rp/ale', { 'do': 'npm install -g prettier' } " asynchronous linting
 
 " Syntax highlighting
 Plug 'robert-claypool/rainbow_parentheses.vim' " syntax matching for parns
-Plug 'gregsexton/MatchTag'                     " MatchParen for HTML tags
-Plug 'sheerun/vim-polyglot'                    " nice stuff, multiple languages
-Plug 'dominikduda/vim_current_word'            " highlight word under the cursor (all occurrences)
+Plug 'gregsexton/MatchTag'                 " MatchParen for HTML tags
+Plug 'sheerun/vim-polyglot'                " nice stuff, multiple languages
+Plug 'dominikduda/vim_current_word'        " highlight word under the cursor (all occurrences)
 
-Plug 'robert-claypool/SQLUtilities'            " SQL formatting
+Plug 'robert-claypool/SQLUtilities'        " SQL formatting
 
 " Git
-Plug 'tpope/vim-fugitive'                      " wrapper functions for Git
-Plug 'airblade/vim-gitgutter'                  " visual display of Git diff
-Plug 'christoomey/vim-conflicted'              " deal with Git merge conflicts
+Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
+Plug 'airblade/vim-gitgutter'              " visual display of Git diff
+Plug 'christoomey/vim-conflicted'          " deal with Git merge conflicts
 
 " Completion
 Plug 'ervandew/supertab'
