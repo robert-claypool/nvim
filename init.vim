@@ -30,9 +30,9 @@ Plug 'w0rp/ale', { 'do': 'npm install -g prettier' } " asynchronous linting
 
 " Syntax highlighting
 Plug 'robert-claypool/rainbow_parentheses.vim' " syntax matching for parns
-Plug 'gregsexton/MatchTag'                 " MatchParen for HTML tags
 Plug 'sheerun/vim-polyglot'                " nice stuff, multiple languages
 Plug 'dominikduda/vim_current_word'        " highlight word under the cursor (all occurrences)
+Plug 'gregsexton/MatchTag', { 'for': ['html', 'css', 'javascript.jsx'] } " MatchParen for HTML tags
 
 Plug 'robert-claypool/SQLUtilities'        " SQL formatting
 
