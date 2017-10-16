@@ -42,7 +42,9 @@ Plug 'airblade/vim-gitgutter'              " visual display of Git diff
 Plug 'christoomey/vim-conflicted'          " deal with Git merge conflicts
 
 " Completion
-Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'                    " advanced snippets (requires Python)
+Plug 'honza/vim-snippets'                  " snippets collection
+Plug 'ervandew/supertab'                   " use <tab> for all insert completions
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
 Plug 'steelsojka/deoplete-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
@@ -916,6 +918,15 @@ augroup plugin_setup
 
     " And this must be set before VimEnter...
     let g:deoplete#enable_at_startup=1
+
+    let g:UltiSnipsExpandTrigger="<c-a>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-s>"
+    let g:UltiSnipsJumpForwardTrigger="<c-d>"
+
+    " Lint only on save or :ALELint
+    " UltiSnips will otherwise be interrupted by ALE.
+    let g:ale_lint_on_text_changed='never'
+    let g:ale_lint_on_save=1
 
     " NOTICE: Tern must be npm installed into bundle/tern_for_vim and
     " Node must be globally available.
