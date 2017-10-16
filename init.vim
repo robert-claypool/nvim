@@ -862,8 +862,10 @@ function! SetPluginOptions()
         let g:ale_completion_enabled=1
         let g:airline#extensions#ale#enabled=1
         let g:ale_open_list=1
+        let g:ale_sign_error='✖'
+        let g:ale_sign_warning='∘'
 
-        let g:ale_javascript_prettier_eslint_options = '--single-quote --trailing-comma es5'
+        let g:ale_javascript_prettier_eslint_options='--single-quote --trailing-comma es5'
         " nmap <silent> <c-[> <Plug>(ale_previous_wrap)
         " nmap <silent> <c-]> <Plug>(ale_next_wrap)
     endif
