@@ -29,7 +29,7 @@ Plug 'rkitover/vimpager'                   " use Vim as PAGER
 Plug 'w0rp/ale', { 'do': 'npm install -g prettier' } " asynchronous linting
 
 " Syntax highlighting
-Plug 'robert-claypool/rainbow_parentheses.vim' " syntax matching for parns
+Plug 'eapache/rainbow_parentheses.vim'     " syntax matching for parns
 Plug 'sheerun/vim-polyglot'                " nice stuff, multiple languages
 Plug 'dominikduda/vim_current_word'        " highlight word under the cursor (all occurrences)
 Plug 'gregsexton/MatchTag', { 'for': ['html', 'css', 'javascript.jsx'] } " MatchParen for HTML tags
