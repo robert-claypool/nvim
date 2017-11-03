@@ -233,6 +233,12 @@ nnoremap <a-j> <c-w>j|  " jump cursor, window to the BELOW
 nnoremap <a-k> <c-w>k|  " jump cursor, window to the ABOVE
 nnoremap <a-l> <c-w>l|  " jump cursor, window to the RIGHT
 
+" Remove all trailing whitespace.
+" http://vi.stackexchange.com/a/2285/4919
+" Mnemonic for the sequence is 'd'elete 'w'hite 's'pace.
+nnoremap <localleader>dws :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
+" And EditorConfig's trim_trailing_whitespace may do this automatically on :w
+
 " Cycle and then show a list of the buffers.
 " The current buffer will be marked with a '#'.
 nnoremap <a-n> :bnext<cr>:redraw<cr>:ls<cr>
