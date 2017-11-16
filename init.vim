@@ -169,6 +169,8 @@ vnoremap <localleader>=t :'<,'>!prettier --stdin --trailing-comma es5 --single-q
 nnoremap <localleader>=t <nop>
 vnoremap <localleader>=c :'<,'>!prettier --stdin --single-quote --parser postcss<cr>
 nnoremap <localleader>=c <nop>
+vnoremap <localleader>=m'<,'>!prettier --stdin --parser markdown<cr>
+nnoremap <localleader>=m <nop>
 
 nnoremap <localleader>ev :vsplit $MYVIMRC<cr>| " mnemonic = 'e'dit my 'v'imrc file
 

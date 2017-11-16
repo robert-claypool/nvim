@@ -36,4 +36,6 @@ Install it with `npm install -g prettier`.
 In Visual mode,
 * `<localleader>=j` calls Prettier for JavaScript
 * `<localleader>=t` calls Prettier for TypeScript
+* `<localleader>=s` calls Prettier for JSON (jSon)
 * `<localleader>=c` calls Prettier for PostCSS (CSS/SASS/LESS)
+* `<localleader>=m` calls Prettier for Markdown
