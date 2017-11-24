@@ -11,6 +11,8 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 3. Run `./bootstrap.sh`
 
+4. Open Neovim and run `:PlugInstall`.
+
 ### On Windows
 1. `git clone https://github.com/robert-claypool/nvim`
 
@@ -26,6 +28,8 @@ $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   )
 )
 ```
+
+4. Open Neovim and run `:PlugInstall`.
 
 
 
