@@ -1,7 +1,7 @@
 # My Neovim Config!
 
 ### On Linux
-1. `git clone git@github.com:robert-claypool/nvim.git`
+1. `git clone https://github.com/robert-claypool/nvim`
 
 2. Install [vim-plug](https://github.com/junegunn/vim-plug)
 ```Shell
@@ -12,7 +12,7 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 3. Run `./bootstrap.sh`
 
 ### On Windows
-1. `git clone git@github.com:robert-claypool/nvim.git`
+1. `git clone https://github.com/robert-claypool/nvim`
 
 2. Open PowerShell, run `./bootstrap.ps1`
 
