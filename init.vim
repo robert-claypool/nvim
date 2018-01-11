@@ -29,11 +29,11 @@ Plug 'rkitover/vimpager'                   " use Vim as PAGER
 Plug 'w0rp/ale', { 'do': 'npm install -g prettier' } " asynchronous linting
 
 " Syntax highlighting
-Plug 'eapache/rainbow_parentheses.vim'     " syntax matching for parns
-Plug 'sheerun/vim-polyglot'                " nice stuff, multiple languages
+Plug 'sheerun/vim-polyglot'                " many plugins wrapped into one
+Plug 'eapache/rainbow_parentheses.vim'     " syntax matching for parens
+Plug 'thiagoalessio/rainbow_levels.vim'    " text colors by indentation level
 Plug 'dominikduda/vim_current_word'        " highlight word under the cursor (all occurrences)
 Plug 'gregsexton/MatchTag', { 'for': ['html', 'css', 'javascript.jsx'] } " MatchParen for HTML tags
-
 Plug 'robert-claypool/SQLUtilities'        " SQL formatting
 
 " Git
@@ -78,6 +78,16 @@ Plug 'morhetz/gruvbox'
 Plug 'reedes/vim-colors-pencil'
 Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
+
+let g:rainbow_levels = [
+    \{'ctermfg': 84,  'guifg': '#50fa7b'},
+    \{'ctermfg': 117, 'guifg': '#8be9fd'},
+    \{'ctermfg': 61,  'guifg': '#6272a4'},
+    \{'ctermfg': 212, 'guifg': '#ff79c6'},
+    \{'ctermfg': 203, 'guifg': '#ffb86c'},
+    \{'ctermfg': 228, 'guifg': '#f1fa8c'},
+    \{'ctermfg': 15,  'guifg': '#f8f8f2'},
+    \{'ctermfg': 231, 'guifg': '#525563'}]
 
 call plug#end()
 
@@ -173,6 +183,7 @@ vnoremap <localleader>=m'<,'>!prettier --stdin --parser markdown<cr>
 nnoremap <localleader>=m <nop>
 
 nnoremap <localleader>ev :vsplit $MYVIMRC<cr>| " mnemonic = 'e'dit my 'v'imrc file
+nnoremap <localleader>rl :RainbowLevelsToggle<cr>| " mnemonic = 'r'ainbow 'l'evels
 
 if !has('clipboard')
     echom "The +clipboard feature was not found."
