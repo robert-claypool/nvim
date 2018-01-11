@@ -126,6 +126,7 @@ set t_Co=256                   " tell Vim that the terminal supports 256 colors
 set t_ut=                      " Disable Background Color Erase for Tmux + Vim. http://superuser.com/a/562423
 set vb                         " visual beep, make co-workers happier
 set cursorline                 " highlight current line
+set cursorcolumn               " highlight the current column
 set showmatch                  " briefly jump to the matching brace when you insert one
 set incsearch                  " search as characters are typed
 set ignorecase                 " ignore case when searching
