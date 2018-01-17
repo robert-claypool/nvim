@@ -29,6 +29,7 @@ Plug 'blueyed/vim-diminactive'             " dim inactive windows
 Plug 'rkitover/vimpager'                   " use Vim as PAGER
 Plug 'w0rp/ale', { 'do': 'npm install -g prettier' } " asynchronous linting
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
+Plug 'easymotion/vim-easymotion'           " easy cursor movements
 
 " Syntax highlighting
 Plug 'sheerun/vim-polyglot'                " many plugins wrapped into one
