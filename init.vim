@@ -17,6 +17,7 @@ Plug 'mhinz/vim-startify'                  " welcome screen for Vim
 Plug 'scrooloose/nerdtree'                 " file/directory explorer
 Plug 'editorconfig/editorconfig-vim'       " honor EditorConfig files
 Plug 'vasconcelloslf/vim-interestingwords' " highlight words
+Plug 'machakann/vim-highlightedyank'       " highlight yanked text
 Plug 'terryma/vim-multiple-cursors'        " Sublime like multiple cursors
 Plug 'nathanaelkane/vim-indent-guides'     " make indents easier to see
 Plug 'vim-airline/vim-airline'             " status bar stuff
@@ -913,6 +914,11 @@ function! SetPluginOptions()
     if exists('g:loaded_EditorConfig')
         echom "Configuring editorconfig-vim..."
         let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+    endif
+
+    if exists("g:loaded_highlightedyank")
+        echom "Configuring highlighted yank..."
+        let g:highlightedyank_highlight_duration = 600
     endif
 
     echom "Ready."
