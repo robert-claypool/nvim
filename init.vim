@@ -79,6 +79,7 @@ Plug 'morhetz/gruvbox'
 Plug 'reedes/vim-colors-pencil'
 Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
+Plug 'challenger-deep-theme/vim'
 
 let g:rainbow_levels = [
     \{'ctermfg': 84,  'guifg': '#50fa7b'},
@@ -323,6 +324,7 @@ colorscheme PaperColor
 " colorscheme jellybeans
 " colorscheme gruvbox
 " colorscheme pencil
+" colorscheme challenger_deep
 
 " let g:onedark_termcolors=16
 " let g:onedark_terminal_italics=1
