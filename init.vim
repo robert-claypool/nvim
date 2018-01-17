@@ -28,6 +28,7 @@ Plug 'w0rp/ale'                            " asynchronous linting
 Plug 'blueyed/vim-diminactive'             " dim inactive windows
 Plug 'rkitover/vimpager'                   " use Vim as PAGER
 Plug 'w0rp/ale', { 'do': 'npm install -g prettier' } " asynchronous linting
+Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
 
 " Syntax highlighting
 Plug 'sheerun/vim-polyglot'                " many plugins wrapped into one
@@ -921,6 +922,12 @@ function! SetPluginOptions()
     if exists("g:loaded_highlightedyank")
         echom "Configuring highlighted yank..."
         let g:highlightedyank_highlight_duration = 600
+    endif
+
+    if exists("g:loaded_bbye")
+        echom "Configuring bbye..."
+        vnoremap <localleader>bd :Bdelete<cr>
+        nnoremap <localleader>bd :Bdelete<cr>
     endif
 
     echom "Ready."
