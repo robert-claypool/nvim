@@ -24,10 +24,9 @@ Plug 'vim-airline/vim-airline'             " status bar stuff
 Plug 'vim-airline/vim-airline-themes'      " status bar themes
 Plug 'sjl/gundo.vim'                       " browse your undo history
 Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
-Plug 'w0rp/ale'                            " asynchronous linting
 Plug 'blueyed/vim-diminactive'             " dim inactive windows
 Plug 'rkitover/vimpager'                   " use Vim as PAGER
-Plug 'w0rp/ale', { 'do': 'npm install -g prettier' } " asynchronous linting
+Plug 'w0rp/ale', { 'do': 'npm install -g prettier tslint typescript eslint' } " asynchronous linting
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
 Plug 'easymotion/vim-easymotion'           " easy cursor movements
 
@@ -883,6 +882,8 @@ function! SetPluginOptions()
     " endif
 
     if exists('g:loaded_ale_dont_use_this_in_other_plugins_please')
+        " By default, ALE will run all available tools for all supported
+        " languages. Configure g:ale_linters if you want to override it.
         echom "Configuring ALE..."
         let g:ale_completion_enabled=1
         let g:airline#extensions#ale#enabled=1
@@ -890,7 +891,16 @@ function! SetPluginOptions()
         let g:ale_sign_error='✖'
         let g:ale_sign_warning='∘'
 
-        let g:ale_javascript_prettier_eslint_options='--single-quote --trailing-comma es5'
+        " You can configure tslint to pick up a Prettier.js configuration
+        " by installing tslint-plugin-prettier and tslint-config-prettier
+        " into your project, then follow their documentation (tl;dr: install
+        " both packages and add both to the `extends` clause of tslint.json,
+        " then add `"prettier": true` to the rules clause).
+        let g:ale_fixers={'typescript': ['tslint'], 'javascript': ['eslint']}
+
+        " Instruct ALE to respect local Prettier configs
+        let g:ale_javascript_prettier_use_local_config = 1
+
         " nmap <silent> <c-[> <Plug>(ale_previous_wrap)
         " nmap <silent> <c-]> <Plug>(ale_next_wrap)
     endif
