@@ -31,7 +31,8 @@ $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 4. Open Neovim and run `:PlugInstall`.
 
-
+If Neovim gives you a TSOnBufEnter error, then run `:UpdateRemotePlugins`,
+see https://github.com/mhartington/nvim-typescript/issues/50
 
 ### External Dependencies
 [Prettier](https://github.com/prettier/prettier) is awesome.
