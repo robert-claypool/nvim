@@ -174,6 +174,10 @@ let maplocalleader="\\"
 " Terminal emulation
 :tnoremap <esc> <c-\><c-n>
 
+" Disable help
+vnoremap K <nop>
+nnoremap K <nop>
+
 " JavaScript & TypeScript formatting require https://github.com/prettier/prettier
 vnoremap <localleader>=j'<,'>!prettier --stdin --trailing-comma es5 --single-quote --parser flow<cr>
 nnoremap <localleader>=j <nop>
