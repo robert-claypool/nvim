@@ -41,7 +41,6 @@ Plug 'robert-claypool/SQLUtilities'        " SQL formatting
 " Git
 Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
 Plug 'airblade/vim-gitgutter'              " visual display of Git diff
-Plug 'christoomey/vim-conflicted'          " deal with Git merge conflicts
 
 " Completion
 Plug 'SirVer/ultisnips'                    " advanced snippets (requires Python)
