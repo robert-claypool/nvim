@@ -893,6 +893,7 @@ function! SetPluginOptions()
         let g:ale_open_list=1
         let g:ale_sign_error='✖'
         let g:ale_sign_warning='∘'
+        let g:ale_loclist_msg_format='[%linter% %code%] %s [%severity%]'
 
         " You can configure tslint to pick up a Prettier.js configuration
         " by installing tslint-plugin-prettier and tslint-config-prettier
