@@ -3,6 +3,8 @@
 " - Call :PlugInstall to install plugins.
 call plug#begin('~/.local/share/nvim/plugged')
 
+" Plugin issues? Try :CheckHealth
+
 " IDE-ish
 Plug 'tweekmonster/startuptime.vim'        " milliseconds matter
 Plug 'tpope/vim-surround'                  " edit surrounding {} [] '' <tag></tag>
@@ -26,7 +28,7 @@ Plug 'sjl/gundo.vim'                       " browse your undo history
 Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
 Plug 'blueyed/vim-diminactive'             " dim inactive windows
 Plug 'rkitover/vimpager'                   " use Vim as PAGER
-Plug 'w0rp/ale', { 'do': 'npm install -g prettier tslint typescript eslint' } " asynchronous linting
+Plug 'w0rp/ale', { 'do': 'npm install -g prettier tslint typescript eslint neovim' } " asynchronous linting
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
 Plug 'easymotion/vim-easymotion'           " easy cursor movements
 
@@ -42,6 +44,12 @@ Plug 'robert-claypool/SQLUtilities'        " SQL formatting
 Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
 Plug 'airblade/vim-gitgutter'              " visual display of Git diff
 
+" TypeScript
+" 1. Open a TypeScript file, then run :UpdateRemotePlugins,
+"    see https://github.com/mhartington/nvim-typescript/issues/139#issuecomment-395906383
+" 2. nvim-typescript requires a tsconfig.json to be present in the current working directory.
+Plug 'mhartington/nvim-typescript', { 'for': 'typescript', 'do': 'npm install -g typescript && ./install.sh' }
+
 " Completion
 Plug 'SirVer/ultisnips'                    " advanced snippets (requires Python)
 Plug 'honza/vim-snippets'                  " snippets collection
@@ -50,11 +58,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
 Plug 'steelsojka/deoplete-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
 Plug 'wellle/tmux-complete.vim'
-
-" TypeScript
-" 1. You may need to run :UpdateRemotePlugins, see https://github.com/mhartington/nvim-typescript/issues/50
-" 2. nvim-typescript requires a tsconfig.json to be present in the current working directory.
-Plug 'mhartington/nvim-typescript', { 'for': 'typescript', 'do': 'npm install -g typescript' }
 
 " JavaScript
 Plug 'pangloss/vim-javascript'
@@ -891,6 +894,7 @@ function! SetPluginOptions()
         let g:ale_completion_enabled=1
         let g:airline#extensions#ale#enabled=1
         let g:ale_open_list=1
+        let g:ale_list_window_size = 4
         let g:ale_sign_error='✖'
         let g:ale_sign_warning='∘'
         let g:ale_loclist_msg_format='[%linter% %code%] %s [%severity%]'
