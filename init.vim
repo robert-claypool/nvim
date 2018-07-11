@@ -436,6 +436,9 @@ augroup END
 
 " Set backup/swap/undo/view files to the proper folders.
 if has('win16') || has('win32')
+    " Note that Vim ignores the // trick for backups, but
+    " I'm leaving it in incase that ever changes.
+    " See https://stackoverflow.com/questions/6698316/restore-vim-backups
     set backupdir=~/git/nvim/nvim-backups//
     set directory=~/git/nvim/nvim-swaps//
     if exists('+undofile')
