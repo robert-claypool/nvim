@@ -39,6 +39,7 @@ Plug 'thiagoalessio/rainbow_levels.vim'    " text colors by indentation level
 Plug 'dominikduda/vim_current_word'        " highlight word under the cursor (all occurrences)
 Plug 'gregsexton/MatchTag', { 'for': ['html', 'css', 'javascript.jsx'] } " MatchParen for HTML tags
 Plug 'robert-claypool/SQLUtilities'        " SQL formatting
+Plug 'vito-c/jq.vim', { 'for': ['jq'] }    " https://stedolan.github.io/jq/
 
 " Git
 Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
@@ -671,6 +672,9 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#whitespace#enabled=1
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#tabline#tab_nr_type=1 " unique number for each tab
+
+" https://github.com/vito-c/jq.vim#confugrations
+let jq_quote_highlight=1
 
 " Author: Tim Dahlin
 " Description: Opens all quickfix files into whatever is the active split.
