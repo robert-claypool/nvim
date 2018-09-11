@@ -153,7 +153,7 @@ set sidescrolloff=3            " don't scroll any closer to the left or right
 set laststatus=2               " always show the status line
 set showmode                   " this is default for Vim, set here as a reminder
 set autoread                   " auto reload files changed outside of Vim
-set synmaxcol=600              " limit syntax highlighing
+set synmaxcol=1000             " limit syntax highlighing
 set breakindent                " make long lines wrap with indentation
 
 " Open new split panes to the right and bottom, which feels more natural.
@@ -241,15 +241,6 @@ function! NumberToggle()
   endif
 endfunc
 nnoremap <localleader>nt :call NumberToggle()<cr>
-
-" We use ww and qq because Vim will wait timeoutlen if there is only one w or q.
-nnoremap <localleader>ww :w<cr>|  " faster save
-nnoremap <localleader>qq :q<cr>|  " faster quit
-nnoremap <localleader>wq :wq<cr>| " faster save and quit
-
-" Windows splits
-nnoremap <localleader>ws <c-w>s|  " split window horizontally
-nnoremap <localleader>wv <c-w>v|  " split window vertically
 
 " Windows navigation
 nnoremap <a-h> <c-w>h|  " jump cursor, window to the LEFT
@@ -457,28 +448,6 @@ endif
 
 set mouse=a
 
-" " Disable netrw
-" let loaded_netrwPlugin = 1
-" augroup my_dirvish_events
-"   autocmd FileType dirvish sort r /[^\/]$/
-" augroup END
-
-" " Prettier
-" function! TogglePrettier()
-"     if !exists('#PrettierAutoGroup#BufWritePre')
-"         echo "autoformat on"
-"         augroup PrettierAutoGroup
-"             autocmd!
-"             autocmd BufWritePre * Neoformat
-"         augroup END
-"     else
-"         echo "autoformat off"
-"         augroup PrettierAutoGroup
-"             autocmd!
-"         augroup END
-"     endif
-" endfunction
-
 let g:neoformat_only_msg_on_error = 1
 
 " inoremap <expr><tab>  pumvisible() ? "<c-n>" : "<tab>"
@@ -579,10 +548,6 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
 " Typo hitting F1 will open "help" when you probably just wanted to get out of insert mode, fix that.
 inoremap <f1> <esc>
-
-" ; repeats the last f/F/ t/T search
-" If you don't care about that, then make ; an alias for <shift>;
-" nnoremap ; :
 
 if v:version >= 704 && has('patch235')
     " ; gets stuck on a t command, but this was fixed in 7.3.235
