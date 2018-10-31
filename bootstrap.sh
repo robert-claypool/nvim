@@ -4,8 +4,9 @@ case $answer in
     *)   echo "Cancelled." & exit 0 ;;
 esac
 
+mkdir -p ~/.local/share/nvim/plugged
+mkdir -p ~/.config
 ln -s ~/git/nvim ~/.config/nvim
-mkdir --parents ~/.local/share/nvim/plugged
 
 echo "Done."
 echo "See README.md for plugin installation instructions."
