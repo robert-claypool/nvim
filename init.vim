@@ -712,6 +712,10 @@ function! SetPluginOptions()
     if exists('g:HardTime_loaded')
         echom "Configuring HardTime..."
         let g:hardtime_maxcount=3
+        " Do not limit "-", see https://github.com/takac/vim-hardtime/issues/48
+        " I only use hjkl repeatedly, so that's all HardTime needs to cover.
+        let g:list_of_normal_keys = ["h", "j", "k", "l"]
+        let g:list_of_visual_keys = ["h", "j", "k", "l"]
     endif
 
     if exists('g:loaded_sqlutilities')
