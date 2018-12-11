@@ -30,6 +30,9 @@ Plug 'blueyed/vim-diminactive'             " dim inactive windows
 Plug 'rkitover/vimpager'                   " use Vim as PAGER
 Plug 'w0rp/ale', { 'do': 'npm install -g prettier tslint typescript eslint neovim' } " asynchronous linting
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
+
+" Motions
+Plug 'takac/vim-hardtime'                  " disable hhhhh,jjjjj,kkkkk,lllll
 Plug 'easymotion/vim-easymotion'           " easy cursor movements
 
 " Syntax highlighting
@@ -72,7 +75,6 @@ Plug 'sbdchd/neoformat'
 " Plug 'benjie/neomake-local-eslint.vim'
 
 " Searching
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim' " The Silver Searcher
 
@@ -263,8 +265,8 @@ nnoremap <a-p> :bprevious<cr>:redraw<cr>:ls<cr>
 " nnoremap <c-j> :tabprevious<cr>
 "
 " FZF searches
-nnoremap <c-t> :FZF<cr>
-inoremap <c-t> <esc>:FZF<cr>i
+nnoremap <c-p> :FZF<cr>
+inoremap <c-p> <esc>:FZF<cr>i
 
 nnoremap <a-\> :NERDTreeToggle<cr>
 inoremap <a-\> <esc>:NERDTreeToggle<cr>
@@ -707,6 +709,11 @@ endfunction
 
 function! SetPluginOptions()
 
+    if exists('g:HardTime_loaded')
+        echom "Configuring HardTime..."
+        let g:hardtime_maxcount=3
+    endif
+
     if exists('g:loaded_sqlutilities')
         echom "Configuring SQL Utilities..."
         " add mappings for SQLUtilities.vim, mnemonic explanation:
@@ -946,6 +953,7 @@ augroup plugin_setup
 
     " And this must be set before VimEnter...
     let g:deoplete#enable_at_startup=1
+    let g:hardtime_default_on=1
 
     let g:UltiSnipsExpandTrigger="<c-a>"
     let g:UltiSnipsJumpBackwardTrigger="<c-s>"
