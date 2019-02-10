@@ -300,6 +300,16 @@ set showbreak=-->\ | " keep a space between \ and |
 iabbrev teh the
 iabbrev Teh The
 
+if has('mac')
+    " To setup Python for plugins like Deoplete...
+    " $ brew install python
+    " $ brew install python3
+    " $ pip2 install neovim --upgrade
+    " $ pip3 install neovim --upgrade
+    let g:python_host_prog='/usr/local/bin/python'
+    let g:python3_host_prog='/usr/local/bin/python3'
+endif
+
 " Appearance
 " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set background=dark " this only tells Vim what the terminal's background color looks like
