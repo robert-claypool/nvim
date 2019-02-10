@@ -719,6 +719,11 @@ endfunction
 
 function! SetPluginOptions()
 
+    if exists('g:EasyMotion_loaded')
+        echom "Configuring EasyMotion..."
+        map <leader> <plug>(easymotion-prefix)
+    endif
+
     if exists('g:HardTime_loaded')
         echom "Configuring HardTime..."
         let g:hardtime_maxcount=3
@@ -726,6 +731,7 @@ function! SetPluginOptions()
         " I only use hjkl repeatedly, so that's all HardTime needs to cover.
         let g:list_of_normal_keys = ["h", "j", "k", "l"]
         let g:list_of_visual_keys = ["h", "j", "k", "l"]
+        let g:hardtime_showmsg = 1
     endif
 
     if exists('g:loaded_sqlutilities')
