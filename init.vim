@@ -28,8 +28,12 @@ Plug 'sjl/gundo.vim'                       " browse your undo history
 Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
 Plug 'blueyed/vim-diminactive'             " dim inactive windows
 Plug 'rkitover/vimpager'                   " use Vim as PAGER
-Plug 'w0rp/ale', { 'do': 'npm install -g prettier tslint typescript eslint neovim' } " asynchronous linting
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
+Plug 'w0rp/ale', {
+   \ 'do': 'npm install -g prettier tslint typescript eslint neovim' } " asynchronous linting
+Plug 'prettier/vim-prettier', {
+   \ 'do': 'npm install',
+   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 " Motions
 Plug 'takac/vim-hardtime'                  " disable hhhhh,jjjjj,kkkkk,lllll
@@ -184,13 +188,13 @@ vnoremap K <nop>
 nnoremap K <nop>
 
 " JavaScript & TypeScript formatting require https://github.com/prettier/prettier
-vnoremap <localleader>=j'<,'>!prettier --stdin --trailing-comma es5 --single-quote --parser flow<cr>
+vnoremap <localleader>=j'<,'>!prettier --stdin --parser babylon<cr>
 nnoremap <localleader>=j <nop>
 vnoremap <localleader>=s'<,'>!prettier --stdin --parser json<cr>
 nnoremap <localleader>=s <nop>
-vnoremap <localleader>=t :'<,'>!prettier --stdin --trailing-comma es5 --single-quote --parser typescript<cr>
+vnoremap <localleader>=t :'<,'>!prettier --stdin --parser typescript<cr>
 nnoremap <localleader>=t <nop>
-vnoremap <localleader>=c :'<,'>!prettier --stdin --single-quote --parser css<cr>
+vnoremap <localleader>=c :'<,'>!prettier --stdin --parser css<cr>
 nnoremap <localleader>=c <nop>
 vnoremap <localleader>=m'<,'>!prettier --stdin --parser markdown<cr>
 nnoremap <localleader>=m <nop>
@@ -946,6 +950,44 @@ function! SetPluginOptions()
         echom "Configuring bbye..."
         vnoremap <localleader>bd :Bdelete<cr>
         nnoremap <localleader>bd :Bdelete<cr>
+    endif
+
+    if exists("g:loaded_prettier")
+        echom "Configuring vim-prettier..."
+        " max line length that prettier will wrap on
+        " Prettier default: 80
+        let g:prettier#config#print_width = 80
+        " number of spaces per indentation level
+        " Prettier default: 2
+        let g:prettier#config#tab_width = 2
+        " use tabs over spaces
+        " Prettier default: false
+        let g:prettier#config#use_tabs = 'false'
+        " print semicolons
+        " Prettier default: true
+        let g:prettier#config#semi = 'true'
+        " single quotes over double quotes
+        " Prettier default: false
+        let g:prettier#config#single_quote = 'false'
+        " print spaces between brackets
+        " Prettier default: true
+        let g:prettier#config#bracket_spacing = 'true'
+        " put > on the last line instead of new line
+        " Prettier default: false
+        let g:prettier#config#jsx_bracket_same_line = 'false'
+        " avoid|always
+        " Prettier default: avoid
+        let g:prettier#config#arrow_parens = 'avoid'
+        " none|es5|all
+        " Prettier default: none
+        let g:prettier#config#trailing_comma = 'none'
+        " flow|babylon|typescript|css|less|scss|json|graphql|markdown
+        " Prettier default: babylon
+        let g:prettier#config#parser = 'babylon'
+        " cli-override|file-override|prefer-file
+        let g:prettier#config#config_precedence = 'prefer-file'
+        " always|never|preserve
+        let g:prettier#config#prose_wrap = 'preserve'
     endif
 
     echom "Ready."
