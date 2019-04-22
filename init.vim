@@ -55,25 +55,22 @@ Plug 'airblade/vim-gitgutter'              " visual display of Git diff
 " 1. Open a TypeScript file, then run :UpdateRemotePlugins,
 "    see https://github.com/mhartington/nvim-typescript/issues/139#issuecomment-395906383
 " 2. nvim-typescript requires a tsconfig.json to be present in the current working directory.
-Plug 'mhartington/nvim-typescript', { 'for': 'typescript', 'do': 'npm install -g typescript && ./install.sh' }
+" Plug 'mhartington/nvim-typescript', { 'for': 'typescript', 'do': 'npm install -g typescript && ./install.sh' }
 
 " Completion
-Plug 'SirVer/ultisnips'                    " advanced snippets (requires Python)
-Plug 'honza/vim-snippets'                  " snippets collection
 Plug 'ervandew/supertab'                   " use <tab> for all insert completions
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g tern' }
-Plug 'steelsojka/deoplete-flow', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install -g flow-bin' }
 Plug 'wellle/tmux-complete.vim'
+Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
+let g:coc_filetypes = []                   " list of filetypes for which coc mappings are enabled
 
 " JavaScript
-Plug 'pangloss/vim-javascript'
-Plug 'gavocanov/vim-js-indent'
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
-Plug 'mxw/vim-jsx'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'sbdchd/neoformat'
+" Plug 'pangloss/vim-javascript'
+" Plug 'gavocanov/vim-js-indent'
+" Plug 'othree/yajs.vim'
+" Plug 'othree/es.next.syntax.vim'
+" Plug 'mxw/vim-jsx'
+" Plug 'othree/javascript-libraries-syntax.vim'
+" Plug 'sbdchd/neoformat'
 " Plug 'neomake/neomake' " Neomake or Ale, not both.
 " Plug 'benjie/neomake-local-eslint.vim'
 
@@ -878,6 +875,20 @@ function! SetPluginOptions()
 
     "     autocmd! BufWritePost * Neomake
     " endif
+
+    if exists('g:did_coc_loaded')
+        echom "Configuring Conquer of Completion..."
+        call coc#add_extension('coc-tsserver', 'coc-eslint', 'coc-prettier')
+        let g:coc_filetypes += ['javascript', 'javascript.jsx', 'typescript', 'typescript.jsx']
+        call coc#config('eslint', {
+            \ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+            \ 'autoFixOnSave': v:false,
+            \ })
+        call coc#config('prettier', {
+            \ 'singleQuote': v:true,
+            \ 'trailingComma': 'es5',
+            \ })
+    endif
 
     if exists('g:loaded_ale_dont_use_this_in_other_plugins_please')
         " By default, ALE will run all available tools for all supported
