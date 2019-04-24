@@ -34,6 +34,7 @@ Plug 'w0rp/ale', {
 Plug 'prettier/vim-prettier', {
    \ 'do': 'npm install',
    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'RRethy/vim-hexokinase'
 
 " Motions
 Plug 'easymotion/vim-easymotion'           " easy cursor movements
@@ -719,6 +720,11 @@ endfunction
 
 function! SetPluginOptions()
 
+    if exists('g:loaded_hexokinase')
+      echom "Configuring vim-hexokinase..."
+      let g:Hexokinase_virtualText = ' ██'
+    endif
+
     if exists('g:EasyMotion_loaded')
         echom "Configuring EasyMotion..."
         map <leader> <plug>(easymotion-prefix)
@@ -1003,6 +1009,9 @@ augroup plugin_setup
         autocmd VimEnter * echom "Use :Man a_program to open the man page for a_program, e.g. :Man mkdir"
     endif
     runtime! ftplugin/man.vim
+
+    " This must be set when vim-hexokinase is loaded...
+    let g:Hexokinase_ftAutoload = ['vim', 'html', 'xml', 'svg', 'css', 'less', 'scss', 'markdown', 'javascript', 'typescript', 'json', 'vue', 'yaml']
 
     " This must be set when indent_guides is loaded...
     let g:indent_guides_enable_on_vim_startup=1
