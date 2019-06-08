@@ -158,6 +158,7 @@ set showmode                   " this is default for Vim, set here as a reminder
 set autoread                   " auto reload files changed outside of Vim
 set synmaxcol=1000             " limit syntax highlighing
 set breakindent                " make long lines wrap with indentation
+set lazyredraw                   " don't redraw screen in the middle of a macro, makes them faster
 
 " Open new split panes to the right and bottom, which feels more natural.
 set splitbelow
