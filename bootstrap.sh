@@ -1,7 +1,7 @@
 read -p "This script assumes your repo is at ~/git/nvim ... Continue? [y,N] " answer
 case $answer in
     y|Y) ;;
-    *)   echo "Cancelled." & exit 0 ;;
+    *)   echo "Canceled." & exit 0 ;;
 esac
 
 mkdir -p ~/.local/share/nvim/plugged
