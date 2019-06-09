@@ -6,7 +6,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Plugin issues? Try :CheckHealth
 
 " IDE-ish
-Plug 'tweekmonster/startuptime.vim'        " milliseconds matter
 Plug 'tpope/vim-surround'                  " edit surrounding {} [] '' <tag></tag>
 Plug 'tpope/vim-unimpaired'                " paris of mapping like ]os & [os
 Plug 'tpope/vim-vinegar'                   " open NERDTree with -
@@ -14,7 +13,6 @@ Plug 'tpope/vim-repeat'                    " better support for .
 Plug 'tpope/vim-commentary'                " comment out code
 Plug 'tpope/vim-sensible'                  " sensible defaults for Vim
 Plug 'tpope/vim-abolish'                   " deal with multiple variants of a word
-Plug 'dahu/vim-fanfingtastic'              " multi-line `f`orwards
 Plug 'mhinz/vim-startify'                  " welcome screen for Vim
 Plug 'scrooloose/nerdtree'                 " file/directory explorer
 Plug 'editorconfig/editorconfig-vim'       " honor EditorConfig files
@@ -34,7 +32,12 @@ Plug 'w0rp/ale', {
 Plug 'prettier/vim-prettier', {
    \ 'do': 'npm install',
    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-Plug 'RRethy/vim-hexokinase'
+Plug 'RRethy/vim-hexokinase'               " hex color swatches like #ff77bb
+Plug 'Shougo/denite.nvim'                  " like a fuzzy finder, but more generic
+Plug 'Shougo/echodoc.vim'                  " print function signatures in echo area
+
+" Searching
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 
 " Motions
 Plug 'easymotion/vim-easymotion'           " easy cursor movements
@@ -47,21 +50,20 @@ Plug 'dominikduda/vim_current_word'        " highlight word under the cursor (al
 Plug 'gregsexton/MatchTag', { 'for': ['html', 'css', 'javascript.jsx'] } " MatchParen for HTML tags
 Plug 'robert-claypool/SQLUtilities'        " SQL formatting
 Plug 'vito-c/jq.vim', { 'for': ['jq'] }    " https://stedolan.github.io/jq/
+Plug 'HerringtonDarkholme/yats.vim'        " TypeScript syntax highlighting
+Plug 'othree/yajs.vim'                     " JavaScript syntax highlighting
+Plug 'mxw/vim-jsx'                         " React JSX syntax highlighting
+
+" Icons
+" Plug 'ryanoasis/vim-devicons'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Git
 Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
-Plug 'airblade/vim-gitgutter'              " visual display of Git diff
-
-" TypeScript
-" 1. Open a TypeScript file, then run :UpdateRemotePlugins,
-"    see https://github.com/mhartington/nvim-typescript/issues/139#issuecomment-395906383
-" 2. nvim-typescript requires a tsconfig.json to be present in the current working directory.
-" Plug 'mhartington/nvim-typescript', { 'for': 'typescript', 'do': 'npm install -g typescript && ./install.sh' }
+Plug 'mhinz/vim-signify'                   " visual display of diffs
 
 " Completion
-Plug 'ervandew/supertab'                   " use <tab> for all insert completions
-Plug 'wellle/tmux-complete.vim'
-Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 let g:coc_filetypes = []                   " list of filetypes for which coc mappings are enabled
 
 " JavaScript
@@ -74,10 +76,6 @@ let g:coc_filetypes = []                   " list of filetypes for which coc map
 " Plug 'sbdchd/neoformat'
 " Plug 'neomake/neomake' " Neomake or Ale, not both.
 " Plug 'benjie/neomake-local-eslint.vim'
-
-" Searching
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-Plug 'rking/ag.vim' " The Silver Searcher
 
 " Color schemes
 Plug 'NLKNguyen/papercolor-theme'
@@ -626,6 +624,7 @@ nnoremap <silent> <localleader>h3 :call HiInterestingWord(3)<cr>
 nnoremap <silent> <localleader>h4 :call HiInterestingWord(4)<cr>
 nnoremap <silent> <localleader>h5 :call HiInterestingWord(5)<cr>
 nnoremap <silent> <localleader>h6 :call HiInterestingWord(6)<cr>
+nnoremap <silent> <localleader>h7 :call HiInterestingWord(7)<cr>
 
 highlight def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
 highlight def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
@@ -633,6 +632,7 @@ highlight def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=12
 highlight def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
 highlight def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
 highlight def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
+highlight def InterestingWord7 guifg=#000000 ctermfg=16 guibg=#444444 ctermbg=238
 
 " Potential lag fix, https://redd.it/1p0e46
 let g:matchparen_insert_timeout=5
@@ -642,6 +642,7 @@ let g:matchparen_insert_timeout=5
 if !exists('g:airline_symbols')
     let g:airline_symbols={}
 endif
+set noshowmode "hide mode in command line since airilne already shows it
 let g:airline_theme='papercolor'
 " Enable powerline fonts if you have them installed.
 " https://powerline.readthedocs.org/en/master/installation.html
@@ -747,23 +748,21 @@ function! SetPluginOptions()
         nmap <localleader>scp  <plug>SQLU_CreateProcedure<cr>
     endif
 
-    if executable('ag')
-        " * (super star) searches the CURRENT buffer for the word under your cursor
-        " bind \* to search ALL OPEN AND SAVED buffers. This will not find changes
-        " in modified buffers, since Ag can only find what is on disk.
-        nnoremap <localleader>* :AgBuffer <c-r><c-w><cr>
-
-        " Use ag over grep, we extract the column as well as the file and line number.
-        set grepprg=ag\ --nogroup\ --nocolor\ --column
-
-        if exists('g:loaded_ctrlp')
-            echom "Configuring CtrlP for Ag..."
-            " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-            let g:ctrlp_user_command='ag %s --files-with-matches --nocolor -g ""'
-            " ag is fast enough that CtrlP doesn't need to cache
-            let g:ctrlp_use_caching=0
-        endif
-    endif
+    " if executable('ag')
+    "     " * (super star) searches the CURRENT buffer for the word under your cursor
+    "     " bind \* to search ALL OPEN AND SAVED buffers. This will not find changes
+    "     " in modified buffers, since Ag can only find what is on disk.
+    "     nnoremap <localleader>* :AgBuffer <c-r><c-w><cr>
+    "     " Use ag over grep, we extract the column as well as the file and line number.
+    "     set grepprg=ag\ --nogroup\ --nocolor\ --column
+    "     if exists('g:loaded_ctrlp')
+    "         echom "Configuring CtrlP for Ag..."
+    "         " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    "         let g:ctrlp_user_command='ag %s --files-with-matches --nocolor -g ""'
+    "         " ag is fast enough that CtrlP doesn't need to cache
+    "         let g:ctrlp_use_caching=0
+    "     endif
+    " endif
 
     if exists('g:loaded_syntastic_plugin')
         echom "Configuring Syntastic..."
@@ -883,20 +882,6 @@ function! SetPluginOptions()
     "     autocmd! BufWritePost * Neomake
     " endif
 
-    if exists('g:did_coc_loaded')
-        echom "Configuring Conquer of Completion..."
-        call coc#add_extension('coc-tsserver', 'coc-eslint', 'coc-prettier')
-        let g:coc_filetypes += ['javascript', 'javascript.jsx', 'typescript', 'typescript.jsx']
-        call coc#config('eslint', {
-            \ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
-            \ 'autoFixOnSave': v:false,
-            \ })
-        call coc#config('prettier', {
-            \ 'singleQuote': v:true,
-            \ 'trailingComma': 'es5',
-            \ })
-    endif
-
     if exists('g:loaded_ale_dont_use_this_in_other_plugins_please')
         " By default, ALE will run all available tools for all supported
         " languages. Configure g:ale_linters if you want to override it.
@@ -957,6 +942,79 @@ function! SetPluginOptions()
         echom "Configuring bbye..."
         vnoremap <localleader>bd :Bdelete<cr>
         nnoremap <localleader>bd :Bdelete<cr>
+    endif
+
+    if exists("g:loaded_signify")
+        echom "Configuring vim-signify..."
+        " Signify only for Git
+        let g:signify_vcs_list = ['git']
+    endif
+
+    if exists('g:loaded_denite')
+        echom "Configuring denite..."
+        " Use ripgrep for searching current directory for files
+        " By default, ripgrep will respect rules in .gitignore
+        "   --files: Print each file that would be searched (but don't search)
+        "   --glob:  Include or exclues files for searching that match the given glob
+        "            (aka ignore .git files)
+        "
+        call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
+
+        " Use ripgrep in place of "grep"
+        call denite#custom#var('grep', 'command', ['rg'])
+
+        " Custom options for ripgrep
+        "   --vimgrep:  Show results with every match on it's own line
+        "   --hidden:   Search hidden directories and files
+        "   --heading:  Show the file name above clusters of matches from each file
+        "   --S:        Search case insensitively if the pattern is all lowercase
+        call denite#custom#var('grep', 'default_opts', ['--hidden', '--vimgrep', '--heading', '-S'])
+
+        " Recommended defaults for ripgrep via Denite docs
+        call denite#custom#var('grep', 'recursive_opts', [])
+        call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+        call denite#custom#var('grep', 'separator', ['--'])
+        call denite#custom#var('grep', 'final_opts', [])
+
+        " Remove date from buffer list
+        call denite#custom#var('buffer', 'date_format', '')
+
+        " Open file commands
+        call denite#custom#map('insert,normal', "<C-t>", '<denite:do_action:tabopen>')
+        call denite#custom#map('insert,normal', "<C-v>", '<denite:do_action:vsplit>')
+        call denite#custom#map('insert,normal', "<C-h>", '<denite:do_action:split>')
+
+        " Custom options for Denite
+        "   auto_resize             - Auto resize the Denite window height automatically.
+        "   prompt                  - Customize denite prompt
+        "   direction               - Specify Denite window direction as directly below current pane
+        "   winminheight            - Specify min height for Denite window
+        "   highlight_mode_insert   - Specify h1-CursorLine in insert mode
+        "   prompt_highlight        - Specify color of prompt
+        "   highlight_matched_char  - Matched characters highlight
+        "   highlight_matched_range - matched range highlight
+        let s:denite_options = {'default' : {
+                    \ 'auto_resize': 1,
+                    \ 'prompt': 'λ:',
+                    \ 'direction': 'rightbelow',
+                    \ 'winminheight': '10',
+                    \ 'highlight_mode_insert': 'Visual',
+                    \ 'highlight_mode_normal': 'Visual',
+                    \ 'prompt_highlight': 'Function',
+                    \ 'highlight_matched_char': 'Function',
+                    \ 'highlight_matched_range': 'Normal'
+                    \ }}
+
+        " Loop through denite options and enable them
+        function! s:profile(opts) abort
+            for l:fname in keys(a:opts)
+                for l:dopt in keys(a:opts[l:fname])
+                    call denite#custom#option(l:fname, l:dopt, a:opts[l:fname][l:dopt])
+                endfor
+            endfor
+        endfunction
+
+        call s:profile(s:denite_options)
     endif
 
     if exists("g:loaded_prettier")
@@ -1047,6 +1105,46 @@ augroup plugin_setup
     let g:tern_request_timeout=1
     let g:tern_show_signature_in_pum=0
 
+    " Allow word highlights to span all windows
+    " let g:vim_current_word#highlight_only_in_focused_window=0
+    highlight CurrentWordTwins guibg=#005f5f ctermbg=23
+    highlight CurrentWord guibg=#005f5f gui=underline ctermbg=23 cterm=underline
+
+    " Wrap in try/catch to avoid errors on initial install before plugin is available
+    try
+        call coc#add_extension('coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-css', 'coc-json')
+        let g:coc_filetypes += ['javascript', 'javascript.jsx', 'typescript', 'typescript.jsx']
+        call coc#config('eslint', {
+                    \ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+                    \ 'autoFixOnSave': v:false,
+                    \ })
+        call coc#config('prettier', {
+                    \ 'singleQuote': v:true,
+                    \ 'trailingComma': 'es5',
+                    \ })
+
+        " coc.nvim color changes
+        hi! link CocErrorSign WarningMsg
+        hi! link CocWarningSign Number
+        hi! link CocInfoSign Type
+
+        " use <tab> to trigger completion and navigate to next complete item
+        function! s:check_back_space() abort
+            let col = col('.') - 1
+            return !col || getline('.')[col - 1]  =~ '\s'
+        endfunction
+
+        inoremap <silent><expr> <tab>
+                    \ pumvisible() ? "\<c-n>" :
+                    \ <sid>check_back_space() ? "\<tab>" :
+                    \ coc#refresh()
+
+        "Close preview window when completion is done.
+        autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+    catch
+        echo 'coc.nvim is not installed. It should work after running :PlugInstall'
+    endtry
+
     " Plugins are loaded *after* Vim has finished processing this config
     " so we test for their existence and do stuff on VimEnter.
     autocmd VimEnter * call SetPluginOptions()
@@ -1067,6 +1165,11 @@ function! GetRichText() range
 endfunction
 
 vnoremap <localleader>rt :call GetRichText()<cr>
+
+" Reload icons after init source
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
 
 " Keep this last.
 set secure
