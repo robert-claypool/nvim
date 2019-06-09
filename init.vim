@@ -301,7 +301,7 @@ iabbrev teh the
 iabbrev Teh The
 
 if has('mac')
-    " To setup Python for plugins like Deoplete...
+    " To setup Python for plugins that need it...
     " $ brew install python
     " $ brew install python3
     " $ pip2 install neovim --upgrade
@@ -715,11 +715,6 @@ augroup nn_setup
     autocmd VimEnter * call Nn()
 augroup END
 
-" This is for finding Flow. See https://github.com/steelsojka/deoplete-flow
-function! StrTrim(txt)
-    return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-endfunction
-
 function! SetPluginOptions()
 
     if exists('g:loaded_hexokinase')
@@ -827,27 +822,7 @@ function! SetPluginOptions()
     endif
 
     if !has("python3")
-        echom "Warning: Deoplete requires Neovim with Python 3."
-    endif
-
-    if exists('g:loaded_deoplete')
-        echom "Configuring Deoplete..."
-        let g:deoplete#file#enable_buffer_path=1
-        let g:SuperTabDefaultCompletionType="<c-n>"
-        set completeopt-=preview
-    endif
-
-    if exists('g:loaded_deoplete_flow')
-        echom "Configuring Deoplete Flow..."
-        " Most of the time you will probably want your flow-bin installed in
-        " your node_modules directory of your current project.
-        " This config will preferably take the local version before the global one:
-        let g:flow_path = StrTrim(system('PATH=$(npm bin):$PATH && which flow'))
-        if g:flow_path == "flow not found" || g:flow_path =~ "which: no flow in"
-            echom "Warning: Flow not found! Install flow-bin with npm."
-        else
-            let g:deoplete#sources#flow#flow_bin=g:flow_path
-        endif
+        echom "Warning: Python 3 not found."
     endif
 
     " if exists('g:loaded_neomake')
@@ -1082,7 +1057,6 @@ augroup plugin_setup
     let g:neocomplete#enable_at_startup=1
 
     " And this must be set before VimEnter...
-    let g:deoplete#enable_at_startup=1
     let g:hardtime_default_on=1
 
     let g:UltiSnipsExpandTrigger="<c-a>"
