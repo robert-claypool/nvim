@@ -35,6 +35,7 @@ Plug 'prettier/vim-prettier', {
 Plug 'RRethy/vim-hexokinase'               " hex color swatches like #ff77bb
 Plug 'Shougo/denite.nvim'                  " like a fuzzy finder, but more generic
 Plug 'Shougo/echodoc.vim'                  " print function signatures in echo area
+Plug 'airblade/vim-rooter'                 " intelligently change :pwd when opening a file (Startify does it too, but only if you open via Startify)
 
 " Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
