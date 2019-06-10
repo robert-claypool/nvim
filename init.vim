@@ -12,7 +12,6 @@ Plug 'tpope/vim-vinegar'                   " open NERDTree with -
 Plug 'tpope/vim-repeat'                    " better support for .
 Plug 'tpope/vim-commentary'                " comment out code
 Plug 'tpope/vim-sensible'                  " sensible defaults for Vim
-Plug 'tpope/vim-abolish'                   " deal with multiple variants of a word
 Plug 'mhinz/vim-startify'                  " welcome screen for Vim
 Plug 'scrooloose/nerdtree'                 " file/directory explorer
 Plug 'editorconfig/editorconfig-vim'       " honor EditorConfig files
@@ -92,12 +91,6 @@ let g:coc_filetypes = []                   " list of filetypes for which coc map
 
 " Color schemes
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'nanotech/jellybeans.vim'
-Plug 'morhetz/gruvbox'
-Plug 'reedes/vim-colors-pencil'
-Plug 'joshdick/onedark.vim'
-Plug 'rakr/vim-one'
-Plug 'challenger-deep-theme/vim'
 
 let g:rainbow_levels = [
     \{'ctermfg': 84,  'guifg': '#50fa7b'},
@@ -345,17 +338,6 @@ else
        \ }
 endif
 colorscheme PaperColor
-" colorscheme jellybeans
-" colorscheme gruvbox
-" colorscheme pencil
-" colorscheme challenger_deep
-
-" let g:onedark_termcolors=16
-" let g:onedark_terminal_italics=1
-" colorscheme onedark
-
-" let g:one_allow_italics = 1 " italic for comments
-" colorscheme one
 
 " Whitespace and color column highlighting are wrapped in a functions because
 " we need to call them when the colorscheme is changed
