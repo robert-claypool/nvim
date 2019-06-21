@@ -50,6 +50,7 @@ Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
 " Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+Plug 'rking/ag.vim' " The Silver Searcher
 
 " Motions
 Plug 'easymotion/vim-easymotion'           " easy cursor movements
@@ -983,6 +984,13 @@ function! SetPluginOptions()
                 endfor
             endfor
         endfunction
+
+        " === Denite shortcuts === "
+        "   <leader>g - Search current directory for occurrences of given term and
+        "   close window if no results
+        "   <leader>j - Search current directory for occurrences of word under cursor
+        nnoremap <leader>g :<c-u>Denite grep:. -no-empty -mode=normal<cr>
+        nnoremap <leader>j :<c-u>DeniteCursorWord grep:. -mode=normal<cr>
 
         call s:profile(s:denite_options)
     endif
