@@ -1,6 +1,6 @@
 # My Neovim Config!
 
-### On Linux
+### On Linux & macOS
 1. `git clone https://github.com/robert-claypool/nvim`
 
 2. Install [vim-plug](https://github.com/junegunn/vim-plug)
