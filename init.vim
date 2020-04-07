@@ -17,7 +17,6 @@ Plug 'scrooloose/nerdtree'                 " file/directory explorer
 Plug 'editorconfig/editorconfig-vim'       " honor EditorConfig files
 Plug 'vasconcelloslf/vim-interestingwords' " highlight words
 Plug 'machakann/vim-highlightedyank'       " highlight yanked text
-Plug 'terryma/vim-multiple-cursors'        " Sublime like multiple cursors
 Plug 'nathanaelkane/vim-indent-guides'     " make indents easier to see
 Plug 'vim-airline/vim-airline'             " status bar stuff
 Plug 'vim-airline/vim-airline-themes'      " status bar themes
@@ -27,7 +26,7 @@ Plug 'blueyed/vim-diminactive'             " dim inactive windows
 Plug 'rkitover/vimpager'                   " use Vim as PAGER
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
 Plug 'w0rp/ale', {
-   \ 'do': 'npm install -g prettier tslint typescript eslint neovim' } " asynchronous linting
+  \ 'do': 'npm install -g prettier tslint typescript eslint neovim' } " asynchronous linting
 Plug 'prettier/vim-prettier', {
    \ 'do': 'npm install',
    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -35,6 +34,7 @@ Plug 'RRethy/vim-hexokinase'               " hex color swatches like #ff77bb
 Plug 'Shougo/denite.nvim'                  " like a fuzzy finder, but more generic
 Plug 'Shougo/echodoc.vim'                  " print function signatures in echo area
 Plug 'airblade/vim-rooter'                 " intelligently change :pwd when opening a file (Startify does it too, but only if you open via Startify)
+Plug 'kshenoy/vim-signature'               " show marks by the number column
 
 " Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
@@ -64,8 +64,8 @@ Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
 Plug 'mhinz/vim-signify'                   " visual display of diffs
 
 " Completion
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-let g:coc_filetypes = []                   " list of filetypes for which coc mappings are enabled
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+" let g:coc_filetypes = []                 " list of filetypes for which coc mappings are enabled
 
 " JavaScript
 " Plug 'pangloss/vim-javascript'
@@ -179,15 +179,15 @@ vnoremap K <nop>
 nnoremap K <nop>
 
 " JavaScript & TypeScript formatting require https://github.com/prettier/prettier
-vnoremap <localleader>=j'<,'>!prettier --stdin --parser babylon<cr>
+vnoremap <localleader>=j'<,'>!prettier --parser babylon<cr>
 nnoremap <localleader>=j <nop>
-vnoremap <localleader>=s'<,'>!prettier --stdin --parser json<cr>
+vnoremap <localleader>=s'<,'>!prettier --parser json<cr>
 nnoremap <localleader>=s <nop>
-vnoremap <localleader>=t :'<,'>!prettier --stdin --parser typescript<cr>
+vnoremap <localleader>=t :'<,'>!prettier --parser typescript<cr>
 nnoremap <localleader>=t <nop>
-vnoremap <localleader>=c :'<,'>!prettier --stdin --parser css<cr>
+vnoremap <localleader>=c :'<,'>!prettier --parser css<cr>
 nnoremap <localleader>=c <nop>
-vnoremap <localleader>=m'<,'>!prettier --stdin --parser markdown<cr>
+vnoremap <localleader>=m'<,'>!prettier --parser markdown<cr>
 nnoremap <localleader>=m <nop>
 
 nnoremap <localleader>ev :vsplit $MYVIMRC<cr>| " mnemonic = 'e'dit my 'v'imrc file
@@ -1076,39 +1076,36 @@ augroup plugin_setup
     highlight CurrentWord guibg=#005f5f gui=underline ctermbg=23 cterm=underline
 
     " Wrap in try/catch to avoid errors on initial install before plugin is available
-    try
-        call coc#add_extension('coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-css', 'coc-json')
-        let g:coc_filetypes += ['javascript', 'javascript.jsx', 'typescript', 'typescript.jsx']
-        call coc#config('eslint', {
-                    \ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
-                    \ 'autoFixOnSave': v:false,
-                    \ })
-        call coc#config('prettier', {
-                    \ 'singleQuote': v:true,
-                    \ 'trailingComma': 'es5',
-                    \ })
+    "try
+    "    call coc#add_extension('coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-css', 'coc-json')
+    "    let g:coc_filetypes += ['javascript', 'javascript.jsx', 'typescript', 'typescript.jsx']
+    "    call coc#config('eslint', {
+    "                \ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+    "                \ 'autoFixOnSave': v:false,
+    "                \ })
+    "    call coc#config('prettier', {
+    "                \ 'singleQuote': v:true,
+    "                \ 'trailingComma': 'es5',
+    "                \ })
+    "    " coc.nvim color changes
+    "    hi! link CocErrorSign WarningMsg
+    "    hi! link CocWarningSign Number
+    "    hi! link CocInfoSign Type
+    "    " use <tab> to trigger completion and navigate to next complete item
+    "    function! s:check_back_space() abort
+    "        let col = col('.') - 1
+    "        return !col || getline('.')[col - 1]  =~ '\s'
+    "    endfunction
 
-        " coc.nvim color changes
-        hi! link CocErrorSign WarningMsg
-        hi! link CocWarningSign Number
-        hi! link CocInfoSign Type
-
-        " use <tab> to trigger completion and navigate to next complete item
-        function! s:check_back_space() abort
-            let col = col('.') - 1
-            return !col || getline('.')[col - 1]  =~ '\s'
-        endfunction
-
-        inoremap <silent><expr> <tab>
-                    \ pumvisible() ? "\<c-n>" :
-                    \ <sid>check_back_space() ? "\<tab>" :
-                    \ coc#refresh()
-
-        "Close preview window when completion is done.
-        autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-    catch
-        echo 'coc.nvim is not installed. It should work after running :PlugInstall'
-    endtry
+    "    inoremap <silent><expr> <tab>
+    "                \ pumvisible() ? "\<c-n>" :
+    "                \ <sid>check_back_space() ? "\<tab>" :
+    "                \ coc#refresh()
+    "    "Close preview window when completion is done.
+    "    autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+    "catch
+    "    echo 'coc.nvim is not installed. It should work after running :PlugInstall'
+    "endtry
 
     " Plugins are loaded *after* Vim has finished processing this config
     " so we test for their existence and do stuff on VimEnter.
