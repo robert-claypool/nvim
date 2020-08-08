@@ -22,7 +22,6 @@ Plug 'nathanaelkane/vim-indent-guides'     " make indents easier to see
 Plug 'vim-airline/vim-airline'             " status bar stuff
 Plug 'vim-airline/vim-airline-themes'      " status bar themes
 Plug 'sjl/gundo.vim'                       " browse your undo history
-Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
 Plug 'blueyed/vim-diminactive'             " dim inactive windows
 Plug 'rkitover/vimpager'                   " use Vim as PAGER
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
@@ -32,8 +31,6 @@ Plug 'prettier/vim-prettier', {
    \ 'do': 'npm install',
    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'RRethy/vim-hexokinase'               " hex color swatches like #ff77bb
-Plug 'Shougo/denite.nvim'                  " like a fuzzy finder, but more generic
-Plug 'Shougo/echodoc.vim'                  " print function signatures in echo area
 Plug 'airblade/vim-rooter'                 " intelligently change :pwd when opening a file (Startify does it too, but only if you open via Startify)
 Plug 'kshenoy/vim-signature'               " show marks by the number column
 
@@ -55,10 +52,6 @@ Plug 'vito-c/jq.vim', { 'for': ['jq'] }    " https://stedolan.github.io/jq/
 Plug 'HerringtonDarkholme/yats.vim'        " TypeScript syntax highlighting
 Plug 'othree/yajs.vim'                     " JavaScript syntax highlighting
 Plug 'mxw/vim-jsx'                         " React JSX syntax highlighting
-
-" Icons
-" Plug 'ryanoasis/vim-devicons'
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Git
 Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
