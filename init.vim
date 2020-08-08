@@ -10,6 +10,7 @@ Plug 'tpope/vim-surround'                  " edit surrounding {} [] '' <tag></ta
 Plug 'tpope/vim-unimpaired'                " paris of mapping like ]os & [os
 Plug 'tpope/vim-vinegar'                   " open NERDTree with -
 Plug 'tpope/vim-repeat'                    " better support for .
+Plug 'tpope/vim-abolish'                   " search for, substitute, abbreviate variants of a word
 Plug 'tpope/vim-commentary'                " comment out code
 Plug 'tpope/vim-sensible'                  " sensible defaults for Vim
 Plug 'mhinz/vim-startify'                  " welcome screen for Vim
