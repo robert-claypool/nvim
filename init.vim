@@ -150,6 +150,9 @@ set synmaxcol=1000             " limit syntax highlighing
 set breakindent                " make long lines wrap with indentation
 set lazyredraw                   " don't redraw screen in the middle of a macro, makes them faster
 
+" Enable live substitution (Neovim only)
+set inccommand=split
+
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
