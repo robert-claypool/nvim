@@ -7,7 +7,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " IDE-ish
 Plug 'tpope/vim-surround'                  " edit surrounding {} [] '' <tag></tag>
-Plug 'tpope/vim-unimpaired'                " paris of mapping like ]os & [os
+Plug 'tpope/vim-unimpaired'                " pairs of mapping like ]os & [os
 Plug 'tpope/vim-vinegar'                   " open NERDTree with -
 Plug 'tpope/vim-repeat'                    " better support for .
 Plug 'tpope/vim-abolish'                   " search for, substitute, abbreviate variants of a word
@@ -21,13 +21,13 @@ Plug 'machakann/vim-highlightedyank'       " highlight yanked text
 Plug 'nathanaelkane/vim-indent-guides'     " make indents easier to see
 Plug 'vim-airline/vim-airline'             " status bar stuff
 Plug 'vim-airline/vim-airline-themes'      " status bar themes
-Plug 'sjl/gundo.vim'                       " browse your undo history
+" Plug 'sjl/gundo.vim'                       " browse your undo history
 Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
 Plug 'blueyed/vim-diminactive'             " dim inactive windows
-Plug 'rkitover/vimpager'                   " use Vim as PAGER
+" Plug 'rkitover/vimpager'                   " use Vim as PAGER
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
 Plug 'w0rp/ale', {
-  \ 'do': 'npm install -g prettier tslint typescript eslint neovim' } " asynchronous linting
+  \ 'do': 'npm install -g prettier tslint typescript eslint @typescript-eslint/parser neovim' } " asynchronous linting
 Plug 'prettier/vim-prettier', {
    \ 'do': 'npm install',
    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -37,6 +37,7 @@ Plug 'kshenoy/vim-signature'               " show marks by the number column
 
 " Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'rking/ag.vim' " The Silver Searcher
 
 " Motions
@@ -59,7 +60,7 @@ Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
 Plug 'mhinz/vim-signify'                   " visual display of diffs
 
 " Completion
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " let g:coc_filetypes = []                 " list of filetypes for which coc mappings are enabled
 
 " JavaScript
@@ -142,11 +143,16 @@ set history=500                " keep a longer history, 20 is the default
 set scrolloff=5                " start scrolling a few lines before the border (more context around the cursor)
 set sidescrolloff=3            " don't scroll any closer to the left or right
 set laststatus=2               " always show the status line
+set cmdheight=2                " more space for displaying messages (for coc.nvim)
 set showmode                   " this is default for Vim, set here as a reminder
 set autoread                   " auto reload files changed outside of Vim
 set synmaxcol=1000             " limit syntax highlighing
 set breakindent                " make long lines wrap with indentation
 set lazyredraw                   " don't redraw screen in the middle of a macro, makes them faster
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
 
 " Open new split panes to the right and bottom, which feels more natural.
 set splitbelow
@@ -853,7 +859,11 @@ function! SetPluginOptions()
         " into your project, then follow their documentation (tl;dr: install
         " both packages and add both to the `extends` clause of tslint.json,
         " then add `"prettier": true` to the rules clause).
-        let g:ale_fixers={'typescript': ['tslint'], 'javascript': ['eslint']}
+        let g:ale_fixers = {
+                    \   'javascript': ['prettier'],
+                    \   'typescript': ['eslint'],
+                    \   'css': ['prettier'],
+                    \}
 
         " Instruct ALE to respect local Prettier configs
         let g:ale_javascript_prettier_use_local_config = 1
@@ -978,6 +988,48 @@ function! SetPluginOptions()
         call s:profile(s:denite_options)
     endif
 
+    if exists("g:fzf_preview_default_fzf_options")
+        " Add recommended mappings.
+        " https://github.com/yuki-ycino/fzf-preview.vim
+        nmap <Leader>f [fzf-p]
+        xmap <Leader>f [fzf-p]
+
+        nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
+        nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
+        nnoremap <silent> [fzf-p]ga    :<C-u>FzfPreviewGitActions<CR>
+        nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
+        nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
+        nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
+        nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
+        nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
+        nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+        nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+        nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
+        xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+        nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
+        nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
+        nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
+
+        nmap <Leader>f [fzf-p]
+        xmap <Leader>f [fzf-p]
+
+        nnoremap <silent> [fzf-p]p     :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+        nnoremap <silent> [fzf-p]gs    :<C-u>CocCommand fzf-preview.GitStatus<CR>
+        nnoremap <silent> [fzf-p]ga    :<C-u>CocCommand fzf-preview.GitActions<CR>
+        nnoremap <silent> [fzf-p]b     :<C-u>CocCommand fzf-preview.Buffers<CR>
+        nnoremap <silent> [fzf-p]B     :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+        nnoremap <silent> [fzf-p]o     :<C-u>CocCommand fzf-preview.FromResources buffer project_mru<CR>
+        nnoremap <silent> [fzf-p]<C-o> :<C-u>CocCommand fzf-preview.Jumps<CR>
+        nnoremap <silent> [fzf-p]g;    :<C-u>CocCommand fzf-preview.Changes<CR>
+        nnoremap <silent> [fzf-p]/     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+        nnoremap <silent> [fzf-p]*     :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+        nnoremap          [fzf-p]gr    :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+        xnoremap          [fzf-p]gr    "sy:CocCommand   fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+        nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
+        nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
+        nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
+    endif
+
     if exists("g:loaded_prettier")
         echom "Configuring vim-prettier..."
         " max line length that prettier will wrap on
@@ -1070,37 +1122,185 @@ augroup plugin_setup
     highlight CurrentWordTwins guibg=#005f5f ctermbg=23
     highlight CurrentWord guibg=#005f5f gui=underline ctermbg=23 cterm=underline
 
-    " Wrap in try/catch to avoid errors on initial install before plugin is available
-    "try
-    "    call coc#add_extension('coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-css', 'coc-json')
-    "    let g:coc_filetypes += ['javascript', 'javascript.jsx', 'typescript', 'typescript.jsx']
-    "    call coc#config('eslint', {
-    "                \ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
-    "                \ 'autoFixOnSave': v:false,
-    "                \ })
-    "    call coc#config('prettier', {
-    "                \ 'singleQuote': v:true,
-    "                \ 'trailingComma': 'es5',
-    "                \ })
-    "    " coc.nvim color changes
-    "    hi! link CocErrorSign WarningMsg
-    "    hi! link CocWarningSign Number
-    "    hi! link CocInfoSign Type
-    "    " use <tab> to trigger completion and navigate to next complete item
-    "    function! s:check_back_space() abort
-    "        let col = col('.') - 1
-    "        return !col || getline('.')[col - 1]  =~ '\s'
-    "    endfunction
+    " =============================================================================
+    " Begin CoC setup
+    " =============================================================================
 
-    "    inoremap <silent><expr> <tab>
-    "                \ pumvisible() ? "\<c-n>" :
-    "                \ <sid>check_back_space() ? "\<tab>" :
-    "                \ coc#refresh()
-    "    "Close preview window when completion is done.
-    "    autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-    "catch
-    "    echo 'coc.nvim is not installed. It should work after running :PlugInstall'
-    "endtry
+    " Wrap in try/catch to avoid errors on initial install before plugin is available
+    try
+        " Some language servers have issues with backup files.
+        " https://github.com/neoclide/coc.nvim/issues/649
+        set nobackup
+        set nowritebackup
+
+        " Don't pass messages to |ins-completion-menu| (recommended for coc.nvim).
+        set shortmess+=c
+
+        " Always show the signcolumn, otherwise it would shift the text each time
+        " diagnostics appear/become resolved.
+        if has("patch-8.1.1564")
+            " Recently vim can merge signcolumn and number column into one
+            set signcolumn=number
+        else
+            set signcolumn=yes
+        endif
+
+        function! s:check_back_space() abort
+            let col = col('.') - 1
+            return !col || getline('.')[col - 1]  =~ '\s'
+        endfunction
+
+        " Use <tab> for trigger completion with characters ahead and navigate.
+        " NOTE: Comment this out and use command ':verbose imap <tab>' to see if tab
+        " is mapped by any other plugin.
+        inoremap <silent><expr> <TAB>
+                    \ pumvisible() ? "\<C-n>" :
+                    \ <SID>check_back_space() ? "\<TAB>" :
+                    \ coc#refresh()
+        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+        " Use <c-space> to trigger completion.
+        if has('nvim')
+            inoremap <silent><expr> <c-space> coc#refresh()
+        else
+            inoremap <silent><expr> <c-@> coc#refresh()
+        endif
+
+        " Use <cr> to confirm completion, `<C-g>u` means break undo chain at
+        " current position. Coc only does snippet and additional edit on confirm.
+        " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+        if exists('*complete_info')
+            inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+        else
+            inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+        endif
+
+        " Use `[g` and `]g` to navigate diagnostics
+        " Use `:CocDiagnostics` to get all diagnostics of current buffer in
+        " location list.
+        nmap <silent> [g <Plug>(coc-diagnostic-prev)
+        nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+        " GoTo code navigation.
+        nmap <silent> gd <Plug>(coc-definition)
+        nmap <silent> gy <Plug>(coc-type-definition)
+        nmap <silent> gi <Plug>(coc-implementation)
+        nmap <silent> gr <Plug>(coc-references)
+
+        " Use K to show documentation in preview window.
+        nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+        function! s:show_documentation()
+            if (index(['vim','help'], &filetype) >= 0)
+                execute 'h '.expand('<cword>')
+            else
+                call CocAction('doHover')
+            endif
+        endfunction
+
+        " Highlight the symbol and its references when holding the cursor.
+        autocmd CursorHold * silent call CocActionAsync('highlight')
+
+        " Symbol renaming.
+        nmap <leader>rn <Plug>(coc-rename)
+
+        " Formatting selected code.
+        xmap <leader>f  <Plug>(coc-format-selected)
+        nmap <leader>f  <Plug>(coc-format-selected)
+
+        augroup mygroup
+            autocmd!
+            " Setup formatexpr specified filetype(s).
+            autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+            " Update signature help on jump placeholder.
+            autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+        augroup end
+
+        " Applying codeAction to the selected region.
+        " Example: `<leader>aap` for current paragraph
+        xmap <leader>a  <Plug>(coc-codeaction-selected)
+        nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+        " Remap keys for applying codeAction to the current buffer.
+        nmap <leader>ac  <Plug>(coc-codeaction)
+        " Apply AutoFix to problem on the current line.
+        nmap <leader>qf  <Plug>(coc-fix-current)
+
+        " Map function and class text objects
+        " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+        xmap if <Plug>(coc-funcobj-i)
+        omap if <Plug>(coc-funcobj-i)
+        xmap af <Plug>(coc-funcobj-a)
+        omap af <Plug>(coc-funcobj-a)
+        xmap ic <Plug>(coc-classobj-i)
+        omap ic <Plug>(coc-classobj-i)
+        xmap ac <Plug>(coc-classobj-a)
+        omap ac <Plug>(coc-classobj-a)
+
+        " Use CTRL-S for selections ranges.
+        " Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
+        nmap <silent> <C-s> <Plug>(coc-range-select)
+        xmap <silent> <C-s> <Plug>(coc-range-select)
+
+        " Add `:Format` command to format current buffer.
+        command! -nargs=0 Format :call CocAction('format')
+
+        " Add `:Fold` command to fold current buffer.
+        command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+        " Add `:OR` command for organize imports of the current buffer.
+        command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+        " Add (Neo)Vim's native statusline support.
+        " NOTE: Please see `:h coc-status` for integrations with external plugins that
+        " provide custom statusline: lightline.vim, vim-airline.
+        " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+        " Mappings for CoCList
+        " Show all diagnostics.
+        nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+        " Manage extensions.
+        nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+        " Show commands.
+        nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+        " Find symbol of current document.
+        nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+        " Search workspace symbols.
+        nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+        " Do default action for next item.
+        nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+        " Do default action for previous item.
+        nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+        " Resume latest coc list.
+        nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+        call coc#add_extension('coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-css', 'coc-json', 'coc-cmake', 'coc-fzf-preview', 'coc-sql', 'coc-spell-checker', 'coc-sh', 'coc-yaml')
+
+        call coc#config('eslint', {
+                    \ 'filetypes': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+                    \ 'autoFixOnSave': v:false,
+                    \ })
+
+        " call coc#config('prettier', {
+        "             \ 'singleQuote': v:true,
+        "             \ 'trailingComma': 'es5',
+        "             \ })
+        command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
+        " coc.nvim color changes
+        hi! link CocErrorSign WarningMsg
+        hi! link CocWarningSign Number
+        hi! link CocInfoSign Type
+
+        "Close preview window when completion is done.
+        autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+    catch
+        echo 'coc.nvim is not installed. It should work after running :PlugInstall'
+    endtry
+
+    " =============================================================================
+    " End CoC setup
+    " =============================================================================
 
     " Plugins are loaded *after* Vim has finished processing this config
     " so we test for their existence and do stuff on VimEnter.
