@@ -21,19 +21,21 @@ Plug 'machakann/vim-highlightedyank'       " highlight yanked text
 Plug 'nathanaelkane/vim-indent-guides'     " make indents easier to see
 Plug 'vim-airline/vim-airline'             " status bar stuff
 Plug 'vim-airline/vim-airline-themes'      " status bar themes
-" Plug 'sjl/gundo.vim'                       " browse your undo history
 Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
 Plug 'blueyed/vim-diminactive'             " dim inactive windows
-" Plug 'rkitover/vimpager'                   " use Vim as PAGER
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
-Plug 'w0rp/ale', {
-  \ 'do': 'npm install -g prettier tslint typescript eslint @typescript-eslint/parser neovim' } " asynchronous linting
-Plug 'prettier/vim-prettier', {
-   \ 'do': 'npm install',
-   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'RRethy/vim-hexokinase'               " hex color swatches like #ff77bb
 Plug 'airblade/vim-rooter'                 " intelligently change :pwd when opening a file (Startify does it too, but only if you open via Startify)
 Plug 'kshenoy/vim-signature'               " show marks by the number column
+
+" Asynchronous linting
+Plug 'w0rp/ale', {
+   \ 'do': 'npm install -g prettier tslint typescript eslint @typescript-eslint/parser neovim' }
+
+" Formatting
+Plug 'prettier/vim-prettier', {
+   \ 'do': 'npm install',
+   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 " Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
@@ -164,9 +166,9 @@ set splitright
 
 set showcmd " shows the current command hence the leader key for as long as it is active
 
-" Time out on mapping after 2 seconds, time out on key codes after 100ms.
+" Time out on mapping after 1 second, time out on key codes after 100ms.
 " See ':help timeoutlen' and tpope/sensible-vim
-set timeout timeoutlen=2000 ttimeoutlen=100
+set timeout timeoutlen=1000 ttimeoutlen=100
 
 let mapleader="," " backslash is the default, comma is easier
 let g:mapleader=","
