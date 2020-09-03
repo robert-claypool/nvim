@@ -22,7 +22,6 @@ Plug 'nathanaelkane/vim-indent-guides'     " make indents easier to see
 Plug 'vim-airline/vim-airline'             " status bar stuff
 Plug 'vim-airline/vim-airline-themes'      " status bar themes
 Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
-Plug 'blueyed/vim-diminactive'             " dim inactive windows
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
 Plug 'RRethy/vim-hexokinase'               " hex color swatches like #ff77bb
 Plug 'airblade/vim-rooter'                 " intelligently change :pwd when opening a file (Startify does it too, but only if you open via Startify)
@@ -356,10 +355,11 @@ function! WhoaTypos(fg,bg)
 endfunction
 
 function! WhoaColorColumn(bg)
-    if exists('+colorcolumn') " short lines are more readable, so...
-        " add a vertical line-length column at 79 characters
-        " 79 is from https://www.python.org/dev/peps/pep-0008/#maximum-line-length
-        set colorcolumn=79
+    if exists('+colorcolumn')
+        " Short lines are more readable, so...
+        " add a vertical line-length column at 80 characters.
+        " https://www.python.org/dev/peps/pep-0008/#maximum-line-length
+        set colorcolumn=80
         exe 'highlight ColorColumn guibg='.a:bg
     endif
 endfunction
@@ -377,7 +377,7 @@ function! PostThemeSettings()
     endif
 endfunction
 call PostThemeSettings()
-call WhoaColorColumn('#1c1c1c')
+call WhoaColorColumn('#00376C')
 
 " Let's make it obvious if I'm in insert mode.
 if version >= 700
@@ -883,10 +883,6 @@ function! SetPluginOptions()
         let g:jsx_ext_required=1 " default is 1
     endif
 
-    if exists('g:loaded_diminactive')
-        echom "Configuring diminactive.vim..."
-    endif
-
     if exists('g:vimpager_plugin_loaded')
         " A binary is required, https://github.com/rkitover/vimpager#install
         if !empty((globpath(&rtp, '/usr/share/vimpager')))
@@ -1094,8 +1090,8 @@ augroup plugin_setup
     " This must be set when indent_guides is loaded...
     let g:indent_guides_enable_on_vim_startup=1
     let g:indent_guides_auto_colors=0
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#161616 ctermbg=black
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#1d1d1d ctermbg=darkgrey
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#103559 ctermbg=black
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#00284F ctermbg=darkgrey
 
     " This must be set when neocomplete is loaded...
     let g:neocomplete#enable_at_startup=1
