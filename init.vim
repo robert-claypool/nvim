@@ -43,7 +43,6 @@ Plug 'rking/ag.vim' " The Silver Searcher
 
 " Motions
 Plug 'easymotion/vim-easymotion'           " easy cursor movements
-Plug 'danilamihailov/beacon.nvim'          " flash on cursor jumps
 
 " Syntax highlighting
 Plug 'sheerun/vim-polyglot'                " many plugins wrapped into one
