@@ -56,6 +56,9 @@ Plug 'HerringtonDarkholme/yats.vim'        " TypeScript syntax highlighting
 Plug 'othree/yajs.vim'                     " JavaScript syntax highlighting
 Plug 'mxw/vim-jsx'                         " React JSX syntax highlighting
 
+Plug 'lifepillar/pgsql.vim'                " PL/pgSQL and PostGIS syntax highlighting
+let g:sql_type_default = 'pgsql'
+
 " Git
 Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
 Plug 'mhinz/vim-signify'                   " visual display of diffs
