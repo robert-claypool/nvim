@@ -150,7 +150,7 @@ set showmode                   " this is default for Vim, set here as a reminder
 set autoread                   " auto reload files changed outside of Vim
 set synmaxcol=1000             " limit syntax highlighing
 set breakindent                " make long lines wrap with indentation
-set lazyredraw                   " don't redraw screen in the middle of a macro, makes them faster
+set lazyredraw                 " don't redraw screen in the middle of a macro, makes them faster
 
 " Enable live substitution (Neovim only)
 set inccommand=split
@@ -185,16 +185,10 @@ vnoremap K <nop>
 nnoremap K <nop>
 
 " JavaScript & TypeScript formatting require https://github.com/prettier/prettier
-vnoremap <localleader>=j'<,'>!prettier --parser babylon<cr>
+vnoremap <localleader>=j'<,'>Prettier<cr>
 nnoremap <localleader>=j <nop>
-vnoremap <localleader>=s'<,'>!prettier --parser json<cr>
-nnoremap <localleader>=s <nop>
-vnoremap <localleader>=t :'<,'>!prettier --parser typescript<cr>
+vnoremap <localleader>=t :'<,'>Prettier<cr>
 nnoremap <localleader>=t <nop>
-vnoremap <localleader>=c :'<,'>!prettier --parser css<cr>
-nnoremap <localleader>=c <nop>
-vnoremap <localleader>=m'<,'>!prettier --parser markdown<cr>
-nnoremap <localleader>=m <nop>
 
 nnoremap <localleader>ev :vsplit $MYVIMRC<cr>| " mnemonic = 'e'dit my 'v'imrc file
 nnoremap <localleader>rl :RainbowLevelsToggle<cr>| " mnemonic = 'r'ainbow 'l'evels
