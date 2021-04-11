@@ -23,7 +23,7 @@ Plug 'vim-airline/vim-airline'             " status bar stuff
 Plug 'vim-airline/vim-airline-themes'      " status bar themes
 Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
-Plug 'RRethy/vim-hexokinase'               " hex color swatches like #ff77bb
+" Plug 'RRethy/vim-hexokinase'               " hex color swatches like #ff77bb
 Plug 'airblade/vim-rooter'                 " intelligently change :pwd when opening a file (Startify does it too, but only if you open via Startify)
 Plug 'kshenoy/vim-signature'               " show marks by the number column
 
