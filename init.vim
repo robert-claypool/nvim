@@ -21,7 +21,7 @@ Plug 'machakann/vim-highlightedyank'       " highlight yanked text
 Plug 'nathanaelkane/vim-indent-guides'     " make indents easier to see
 Plug 'vim-airline/vim-airline'             " status bar stuff
 Plug 'vim-airline/vim-airline-themes'      " status bar themes
-Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
+" Plug 'christoomey/vim-tmux-navigator'      " seamless nav between tmux panes and vim splits
 Plug 'moll/vim-bbye'                       " delete buffers without messing up your layout
 " Plug 'RRethy/vim-hexokinase'               " hex color swatches like #ff77bb
 Plug 'airblade/vim-rooter'                 " intelligently change :pwd when opening a file (Startify does it too, but only if you open via Startify)
@@ -60,7 +60,7 @@ Plug 'lifepillar/pgsql.vim'                " PL/pgSQL and PostGIS syntax highlig
 let g:sql_type_default = 'pgsql'
 
 " Git
-Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
+" Plug 'tpope/vim-fugitive'                  " wrapper functions for Git
 Plug 'mhinz/vim-signify'                   " visual display of diffs
 
 " Completion
