@@ -37,8 +37,8 @@ Plug 'prettier/vim-prettier', {
    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 " Searching
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release/rpc' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 Plug 'rking/ag.vim' " The Silver Searcher
 
 " Motions
@@ -66,6 +66,9 @@ Plug 'mhinz/vim-signify'                   " visual display of diffs
 " Completion
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " let g:coc_filetypes = []                 " list of filetypes for which coc mappings are enabled
+
+" Golang
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " JavaScript
 " Plug 'pangloss/vim-javascript'
