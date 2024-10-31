@@ -8,3 +8,6 @@ nvim-undos
 
 # Putting the custom words list online can leak info on what you are writing.
 spell
+
+# macOS junk
+.DS_Store
